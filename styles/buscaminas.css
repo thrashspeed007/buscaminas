@@ -1,3 +1,35 @@
 @import url("bootstrap-reboot.css");
 @import url("bootstrap-grid.css");
 
+header{
+    background-color: #a2a2a2;
+}
+.row img{
+    width: 150px;
+}
+.row h1{
+    margin: 0 0;
+}
+.divHeader{
+    padding: 10px;
+    text-align: center;
+}
+.nav{
+    display: none;
+}
+.active{
+    display: block;
+    padding: 1px;
+    position: static;
+}
+.fa-bars{
+    color: black;
+    font-size: 3em;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.fa-bars:hover{
+    color: blue;
+    transition: 0.2s;
+}
+
