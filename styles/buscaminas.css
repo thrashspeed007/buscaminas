@@ -17,6 +17,8 @@ header{
 .nav{
     display: none;
     margin: 10px auto;
+    gap: 10px;
+    padding: 30px;
 }
 .active{
     display: flex;
