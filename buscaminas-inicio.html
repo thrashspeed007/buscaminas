@@ -11,64 +11,100 @@
 </head>
 <body>
     <header>
-        <div class="row justify-content-center align-items-center" >
-            <div class="col-3 divHeader">
+        <div class="row divHeader justify-content-center align-items-center no-gutters" >
+            <div class="col-3">
                 <i class="fa-solid fa-bars" id="hamburger-menu" aria-hidden="true"></i>
             </div>
-            <div class="col-6 divHeader">
+            <div class="col-6">
                 <h1>BUSCAMINAS</h1>
             </div>
-            <div class="col-3 divHeader">
-                    <button>ZOOM</button>
+            <div class="col-3">
+                <button>ZOOM</button>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center no-gutters">
             <img src="img/bomba.jpg" alt="">
         </div>
     </header>
-    <main>
-        <nav class="nav row justify-content-center" id="nav">
+    <main> 
+        <nav class="nav row justify-content-center no-gutters" id="nav">
             <button>Juego 1</button>
             <button>Juego 2</button>
             <button>Juego 3</button>
         </nav>
-        
+
+        <div class="reglas">
+            <div class="row">
+                <div class="divFoto col-2">
+                    <img src="img/carita.png" alt="">
+                </div>
+                <div class="col-10">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="divFoto col-2">
+                    <img src="" alt="">
+                </div>
+                <div class="col-10">
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="divFoto col-2">
+                    <img src="" alt="">
+                </div>
+                <div class="col-10">
+                    
+                </div>
+            </div>
+        </div>
+
+        <form action="">
+            <div id="datosPartida" class="d-flex flex-column align-items-center">
+            
+                <div>
+                    <div>
+                        <label for="filas">Dificultad: </label>
+                        <select name="dificultad" id="dificultad">
+                            <option value="10x10x10">Fácil</option>
+                            <option value="15x20x40">Intermedio</option>
+                            <option value="15x30x90">Difícil</option>
+                            <option value="personalizado">Personalizado</option>
+                        </select>
+                    </div>
+                    <div class="personalizado" id="personalizado">
+                        <fieldset>
+                            <legend>Personalizado</legend>
+                            <div>
+                                <label for="filas">Filas:</label>
+                                <input type="number" id="filas">
+                            </div>
+                            <div>
+                                <label for="columnas">Columnas:</label>
+                                <input type="number" id="columnas">
+                            </div>
+                            <div>
+                                <label for="bombas">Nº de bombas:</label>
+                                <input type="number" id="bombas">
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+    
+                <button onclick="iniciarPartida()">Iniciar Partida</button>
+            </div>
+        </form>
+
         <div class="divJuego">
 
         </div>
 
-        <div id="datosPartida" class="row flex-column align-items-center">
-            <div>
-                <div>
-                    <label for="filas">Dificultad: </label>
-                    <select name="dificultad" id="dificultad">
-                        <option value="10x10x10">Fácil</option>
-                        <option value="15x20x40">Intermedio</option>
-                        <option value="15x30x90">Difícil</option>
-                        <option value="personalizado">Personalizado</option>
-                    </select>
-                </div>
-                <div class="personalizado" id="personalizado">
-                    <fieldset>
-                        <legend>Personalizado</legend>
-                        <div>
-                            <label for="filas">Filas:</label>
-                            <input type="number" id="filas">
-                        </div>
-                        <div>
-                            <label for="columnas">Columnas:</label>
-                            <input type="number" id="columnas">
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-
-            <button onclick="iniciarPartida()">Iniciar Partida</button>
-        </div>
-
     </main>
     <footer>
-
+        <div>
+            
+        </div>
     </footer>
 </body>
 </html>

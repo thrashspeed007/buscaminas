@@ -11,14 +11,15 @@ header{
     margin: 0 0;
 }
 .divHeader{
-    padding: 10px;
     text-align: center;
+}
+.divHeader div{
+    margin: 10px auto;
 }
 .nav{
     display: none;
     margin: 10px auto;
     gap: 10px;
-    padding: 30px;
 }
 .active{
     display: flex;
@@ -44,5 +45,15 @@ fieldset{
 }
 .personalizado{
     display: none;
+    
+}
+.personalizado label{
+    width: 150px;
+    text-align: start;
+}
+.divJuego{
+    margin: 10px 65px;
+    height: 400px;
+    background-color: grey;
 }
 
