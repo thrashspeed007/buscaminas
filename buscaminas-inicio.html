@@ -33,29 +33,37 @@
             <button>Juego 3</button>
         </nav>
 
-        <div class="reglas">
-            <div class="row">
+        <div class="instrucciones">
+            <h2>Reglas del juego</h2>
+            <div class="d-flex flex-column reglas">
+                <p>El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.</p>
+                <p>Algunas casillas tienen un número, este número indica las minas que son en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con minas y 5 sin minas. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y estas se descubren automáticamente.</p>
+                <p>Si se descubre una casilla con una mina se pierde la partida.</p>
+                <p>Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.</p>
+            </div>
+            <h2>Explicación de los iconos</h2>
+            <div class="row filaIcono align-items-center">
                 <div class="divFoto col-2">
                     <img src="img/carita.png" alt="">
                 </div>
                 <div class="col-10">
-
+                    <p>Este icono sirve para reiniciar la partida al darle clic. También, si logras la victoria la carita se pondrá unas gafas de sol B).</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row filaIcono align-items-center">
                 <div class="divFoto col-2">
-                    <img src="" alt="">
+                    <img src="img/bombita.jpg" alt="">
                 </div>
                 <div class="col-10">
-                    
+                    <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row filaIcono align-items-center">
                 <div class="divFoto col-2">
-                    <img src="" alt="">
+                    <img src="img/banderita.png" alt="">
                 </div>
                 <div class="col-10">
-                    
+                    <p>Las banderas como esta sirven para marcar una casilla en la que crees que hay una mina. De esta forma puedes ir destapando las demas casillas y ver mejor el tablero.</p>
                 </div>
             </div>
         </div>
