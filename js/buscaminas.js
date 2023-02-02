@@ -28,7 +28,6 @@ function mostrarDivPersonalizado() {
     if (dificultad.value === "personalizado") {
         personalizado.style.display = "flex"
     }else{
-        console.log("dx");
         personalizado.style.display = "none"
     }
 }
@@ -41,14 +40,41 @@ function menuResponsive() {
 }
 
 function crearTablero(filas, columnas) {
-    
+
     for (let i = 0; i < filas; i++) {
         let fila = tablero.insertRow();
         for (let j = 0; j < columnas; j++) {
             let columna = fila.insertCell();
-            columna.appendChild(document.createTextNode(j));
+            columna.setAttribute("id", "f" + i + "c" + j);
+            columna.addEventListener("click", function() {
+                destaparCasilla(columna.id);
+            })
         }
     }
+}
+
+function rellenarMinas(nbombas, filas, columnas) {
+    let minas = new Array();
+    let fila;
+    let celda;
+    let idMina;
+
+    for (let i = 0; i < nbombas;) {
+        random = String("0" + Math.floor(Math.random() * (filas*columnas))).slice(-2);
+        if (!minas.includes(random)) {
+            i++;
+            fila = "f" + String(random).charAt(0);
+            celda = "c" + String(random).charAt(1);
+            idMina = fila+celda;
+            minas.push(idMina);
+            console.log(random);
+        }
+    }
+    console.log(minas);
+}
+
+function destaparCasilla(id) {
+    console.log("el id es" + id);
 }
 
 function iniciarPartida() {
@@ -76,11 +102,14 @@ function iniciarPartida() {
     }
 
     if (creaTablero) {
+        divDatosPartida.classList.add("hidden");
         crearTablero(filas, columnas);
-        juego();
+        rellenarMinas(nbombas, filas, columnas);
     }
 }
 
 function juego() {
-    divDatosPartida.classList.add("hidden");
+    let minas = new Array();
+    
+
 }

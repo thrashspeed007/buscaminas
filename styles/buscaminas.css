@@ -33,6 +33,12 @@ header{
 table, td{
     border: 1px solid black;
 }
+td{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background-color: #a2a2a2;
+}
 .row img{
     width: 150px;
 }
@@ -46,6 +52,9 @@ table, td{
 .divHeader{
     text-align: center;
     padding: 10px 0;
+}
+.divJuego{
+    margin: 10px auto;
 }
 
 .nav{
