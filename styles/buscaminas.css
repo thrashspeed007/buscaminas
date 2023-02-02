@@ -1,6 +1,32 @@
 @import url("bootstrap-reboot.css");
 @import url("bootstrap-grid.css");
 
+@font-face {
+    font-family: 'retroRegular';
+    src: url(/fonts/PixeloidMono-VGj6x.ttf);
+}
+@font-face {
+    font-family: 'retroSans';
+    src: url(/fonts/PixeloidSans-JR6qo.ttf);
+}
+@font-face {
+    font-family: 'retroBold';
+    src: url(/fonts/PixeloidSansBold-GOjpP.ttf);
+}
+
+:root{
+    --regular: retroSans, sans-serif;
+    --negrita: retroBold, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: var(--negrita);
+    
+}
+*{
+    font-family: var(--regular);
+}
+
 header{
     background-color: #a2a2a2;
 }
@@ -11,12 +37,13 @@ header{
     margin: 0 0;
 
 }
+.logo{
+    margin-bottom: 10px;
+}
 .divHeader{
     text-align: center;
 }
-.divHeader div{
-    margin: 10px auto;
-}
+
 .nav{
     display: none;
     margin: 10px auto;
@@ -36,6 +63,24 @@ header{
     color: blue;
     transition: 0.2s;
 }
+.zoom{
+    position: relative;
+    margin: 0 0;
+}
+.zoomOptions{
+    position: absolute;
+    display: none;
+    width: 100%;
+}
+.zoomOptions button{
+    display: block;
+    width: 50px;
+    margin: 0 auto;
+}
+.zoom:hover .zoomOptions{
+    display: block;
+}
+
 #datosPartida div{
     text-align: center;
     margin: 5px auto;

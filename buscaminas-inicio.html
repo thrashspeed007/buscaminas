@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles/buscaminas.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/8bit-wonder" type="text/css"/>
     <script src="https://kit.fontawesome.com/a1e6115532.js" crossorigin="anonymous"></script>
     <script src="js/buscaminas.js" defer></script>
 </head>
@@ -18,12 +19,17 @@
             <div class="col-6">
                 <h1>BUSCAMINAS</h1>
             </div>
-            <div class="col-3">
+            <div class="col-3 zoom">
                 <button>ZOOM</button>
+                <div class="zoomOptions">
+                    <button value="1.25">1.25</button>
+                    <button value="1.5">1.5</button>
+                    <button value="2">2</button>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center no-gutters">
-            <img src="img/bomba.jpg" alt="">
+            <img class="logo" src="img/bomba.webp" alt="">
         </div>
     </header>
     <main> 
@@ -52,7 +58,7 @@
             </div>
             <div class="row filaIcono align-items-center">
                 <div class="divFoto col-2">
-                    <img src="img/bombita.jpg" alt="">
+                    <img src="img/bomba.webp" alt="">
                 </div>
                 <div class="col-10">
                     <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego</p>
@@ -83,7 +89,6 @@
                     </div>
                     <div class="personalizado" id="personalizado">
                         <fieldset>
-                            <legend>Personalizado</legend>
                             <div>
                                 <label for="filas">Filas:</label>
                                 <input type="number" id="filas">
