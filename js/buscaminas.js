@@ -1,6 +1,23 @@
 const hamburgerMenu = document.getElementById('hamburger-menu');
 const nav = document.getElementById('nav');
-const divJuego = document.getElementsByClassName('divJuego');
+const divJuego = document.getElementById('divJuego');
+const tablero = document.getElementById('tablero');
+const divDatosPartida = document.getElementById('datosPartida');
+
+// Opciones del zoom
+
+document.getElementById('z100').addEventListener('click', function(){
+    document.body.style.zoom = '1';
+});
+document.getElementById('z125').addEventListener('click', function(){
+    document.body.style.zoom = '1.25';
+});
+document.getElementById('z150').addEventListener('click', function(){
+    document.body.style.zoom = '1.50';
+});
+document.getElementById('z200').addEventListener('click', function(){
+    document.body.style.zoom = '2';
+});
 
 const dificultad = document.getElementById('dificultad');
 dificultad.addEventListener("change", mostrarDivPersonalizado);
@@ -24,23 +41,46 @@ function menuResponsive() {
 }
 
 function crearTablero(filas, columnas) {
-
-    divJuego.innerHTML += "<table>";
-
+    
     for (let i = 0; i < filas; i++) {
-        divJuego.innerHTML += "<tr>";
+        let fila = tablero.insertRow();
         for (let j = 0; j < columnas; j++) {
-            divJuego.innerHTML += "<td>";
-            divJuego.innerHTML += "uwu " + j;
-            divJuego.innerHTML += "</td>";
+            let columna = fila.insertCell();
+            columna.appendChild(document.createTextNode(j));
         }
-        divJuego.innerHTML += "</tr>";
-        
     }
-
-    divJuego.innerHTML += "</table>";
 }
 
-function inicarPartida() {
-    
+function iniciarPartida() {
+    let dificultad = document.getElementById('dificultad').value;
+    let filas = 0;
+    let columnas = 0;
+    let nbombas = 0;
+    let creaTablero = true;
+
+    if (dificultad === "personalizado") {
+
+        filas = document.getElementById("filas").value;
+        columnas = document.getElementById("columnas").value;
+        nbombas = document.getElementById("nbombas").value;
+
+        if (filas == 0 || columnas == 0 || nbombas == 0) {
+            document.getElementById("errorCampos").classList.add("errorCamposActivo");
+            creaTablero = false;
+        }
+    }else{
+        let dificultadArray = dificultad.split("x");
+        filas = dificultadArray[0];
+        columnas = dificultadArray[1];
+        nbombas = dificultadArray[2];
+    }
+
+    if (creaTablero) {
+        crearTablero(filas, columnas);
+        juego();
+    }
+}
+
+function juego() {
+    divDatosPartida.classList.add("hidden");
 }

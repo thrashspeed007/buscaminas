@@ -30,6 +30,9 @@ h1,h2,h3,h4,h5,h6{
 header{
     background-color: #a2a2a2;
 }
+table, td{
+    border: 1px solid black;
+}
 .row img{
     width: 150px;
 }
@@ -42,6 +45,7 @@ header{
 }
 .divHeader{
     text-align: center;
+    padding: 10px 0;
 }
 
 .nav{
@@ -91,19 +95,20 @@ fieldset{
 }
 .personalizado{
     display: none;
-    
+}
+.errorCampos{
+    display: none;
+}
+.errorCamposActivo{
+    display: block;
+    border: 1px solid;
+    color: red;
+    padding: 5px;
 }
 .personalizado label{
     width: 150px;
     text-align: start;
 }
-.divJuego{
-    margin: 10px 65px;
-    height: 400px;
-    background-color: grey;
-}
-
-
 .instrucciones{
     width: 80%;
     margin: 0 auto;
@@ -112,6 +117,10 @@ fieldset{
 .instrucciones p{
     margin: 0 0;
     padding: 5px;
+}
+
+.hidden{
+    display: none !important;
 }
 
 /*Estilos para las reglas del juego*/
