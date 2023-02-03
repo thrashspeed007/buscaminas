@@ -34,10 +34,13 @@ table, td{
     border: 1px solid black;
 }
 td{
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     text-align: center;
     background-color: #a2a2a2;
+}
+.tablero{
+    margin: 0px auto;
 }
 .row img{
     width: 150px;
@@ -55,6 +58,12 @@ td{
 }
 .divJuego{
     margin: 10px auto;
+    width: 80%;
+}
+.derrota{
+    display: none;
+    margin: 10px auto;
+    font-family: var(--negrita);
 }
 
 .nav{
@@ -105,14 +114,17 @@ fieldset{
 .personalizado{
     display: none;
 }
-.errorCampos{
+.error{
     display: none;
-}
-.errorCamposActivo{
-    display: block;
     border: 1px solid;
     color: red;
     padding: 5px;
+}
+.error span{
+    font-family: var(--negrita);
+}
+.errorCamposActivo{
+    display: block;
 }
 .personalizado label{
     width: 150px;
@@ -147,5 +159,10 @@ fieldset{
     width: 100%;
     max-width: 85px;
     min-width: 40px;
+}
+
+.divFooter{
+    background-color: #a2a2a2;
+    text-align: center;
 }
 

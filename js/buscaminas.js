@@ -3,6 +3,7 @@ const nav = document.getElementById('nav');
 const divJuego = document.getElementById('divJuego');
 const tablero = document.getElementById('tablero');
 const divDatosPartida = document.getElementById('datosPartida');
+let minas = new Array();
 
 // Opciones del zoom
 
@@ -41,40 +42,55 @@ function menuResponsive() {
 
 function crearTablero(filas, columnas) {
 
+    let contador = 0;
+
     for (let i = 0; i < filas; i++) {
         let fila = tablero.insertRow();
         for (let j = 0; j < columnas; j++) {
             let columna = fila.insertCell();
-            columna.setAttribute("id", "f" + i + "c" + j);
+            columna.setAttribute("id", contador);
             columna.addEventListener("click", function() {
                 destaparCasilla(columna.id);
-            })
+            });
+            contador++;
         }
     }
 }
 
 function rellenarMinas(nbombas, filas, columnas) {
-    let minas = new Array();
     let fila;
     let celda;
     let idMina;
+    let totalCeldas = filas * columnas;
 
     for (let i = 0; i < nbombas;) {
-        random = String("0" + Math.floor(Math.random() * (filas*columnas))).slice(-2);
-        if (!minas.includes(random)) {
+        let randomNum = Math.floor(Math.random() * (totalCeldas));
+        if (!minas.includes(randomNum)) {
+            console.log(randomNum);
             i++;
-            fila = "f" + String(random).charAt(0);
-            celda = "c" + String(random).charAt(1);
-            idMina = fila+celda;
-            minas.push(idMina);
-            console.log(random);
+            minas.push(randomNum.toString());
+            console.log(randomNum);
         }
     }
     console.log(minas);
 }
 
 function destaparCasilla(id) {
-    console.log("el id es" + id);
+
+    if (minas.includes(id)) {
+        minas.forEach(element => {
+            document.getElementById(element).style.backgroundColor = "red";
+            derrota();
+        });
+
+    }else{
+        calcularBombasVecinas(id);
+    }
+
+}
+
+function calcularBombasVecinas(id) {
+    
 }
 
 function iniciarPartida() {
@@ -109,7 +125,15 @@ function iniciarPartida() {
 }
 
 function juego() {
-    let minas = new Array();
+    
     
 
+}
+
+function derrota() {
+    document.getElementById('derrota').style.display = "block"
+}
+
+function reset() {
+    minas = new Array();
 }

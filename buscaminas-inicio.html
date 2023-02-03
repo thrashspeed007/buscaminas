@@ -35,7 +35,7 @@
     </header>
     <main> 
         <nav class="nav row justify-content-center no-gutters" id="nav">
-            <button>Juego 1</button>
+            <button>Juego 1</button> 
             <button>Juego 2</button>
             <button>Juego 3</button>
         </nav>
@@ -48,31 +48,34 @@
                 <p>Si se descubre una casilla con una mina se pierde la partida.</p>
                 <p>Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.</p>
             </div>
-            <h2>Explicación de los iconos</h2>
-            <div class="row filaIcono align-items-center">
-                <div class="divFoto col-2">
-                    <img src="img/carita.png" alt="">
+            <div class="d-flex flex-column iconos">
+                <h2>Explicación de los iconos</h2>
+                <div class="row filaIcono align-items-center">
+                    <div class="divFoto col-2">
+                        <img src="img/carita.png" alt="">
+                    </div>
+                    <div class="col-10">
+                        <p>Este icono sirve para reiniciar la partida al darle clic. También, si logras la victoria la carita se pondrá unas gafas de sol B).</p>
+                    </div>
                 </div>
-                <div class="col-10">
-                    <p>Este icono sirve para reiniciar la partida al darle clic. También, si logras la victoria la carita se pondrá unas gafas de sol B).</p>
+                <div class="row filaIcono align-items-center">
+                    <div class="divFoto col-2">
+                        <img src="img/bomba.webp" alt="">
+                    </div>
+                    <div class="col-10">
+                        <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego</p>
+                    </div>
+                </div>
+                <div class="row filaIcono align-items-center">
+                    <div class="divFoto col-2">
+                        <img src="img/banderita.png" alt="">
+                    </div>
+                    <div class="col-10">
+                        <p>Las banderas como esta sirven para marcar una casilla en la que crees que hay una mina. De esta forma puedes ir destapando las demas casillas y ver mejor el tablero.</p>
+                    </div>
                 </div>
             </div>
-            <div class="row filaIcono align-items-center">
-                <div class="divFoto col-2">
-                    <img src="img/bomba.webp" alt="">
-                </div>
-                <div class="col-10">
-                    <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego</p>
-                </div>
-            </div>
-            <div class="row filaIcono align-items-center">
-                <div class="divFoto col-2">
-                    <img src="img/banderita.png" alt="">
-                </div>
-                <div class="col-10">
-                    <p>Las banderas como esta sirven para marcar una casilla en la que crees que hay una mina. De esta forma puedes ir destapando las demas casillas y ver mejor el tablero.</p>
-                </div>
-            </div>
+
         </div>
 
         <form action="">
@@ -88,7 +91,7 @@
                         </select>
                     </div>
                     <div class="personalizado flex-column" id="personalizado">
-                        <div class="errorCampos row" id="errorCampos">
+                        <div class="error row" id="errorCampos">
                             <span>Rellena todos los campos porfavor</span>
                         </div>
                         <fieldset>
@@ -112,16 +115,27 @@
             </div>
         </form>
 
-        <div class="divJuego d-flex justify-content-center" id="divJuego">
-            <table id="tablero">
+        <div class="divJuego d-flex justify-content-center flex-column" id="divJuego">
+            <div class="derrota error" id="derrota">
+                <span>¡Lo siento, has perdido!</span>
+            </div>
+            <table id="tablero" class="tablero">
 
             </table>
         </div>
 
     </main>
     <footer>
-        <div>
-            
+        <div class="row divFooter no-gutters">
+            <div class="col-4">
+                <p>*redes sociales*</p>
+            </div>
+            <div class="col-4">
+                <p>Creado por Adrián García</p>
+            </div>
+            <div class="col-4">
+                *declaración de accesibilidad*  
+            </div>
         </div>
     </footer>
 </body>
