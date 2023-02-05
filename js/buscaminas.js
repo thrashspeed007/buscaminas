@@ -1,9 +1,16 @@
-const hamburgerMenu = document.getElementById('hamburger-menu');
-const nav = document.getElementById('nav');
-const divJuego = document.getElementById('divJuego');
-const tablero = document.getElementById('tablero');
-const divDatosPartida = document.getElementById('datosPartida');
+let hamburgerMenu = document.getElementById('hamburger-menu');
+let nav = document.getElementById('nav');
+let divJuego = document.getElementById('divJuego');
+let tablero = document.getElementById('tablero');
+let divDatosPartida = document.getElementById('datosPartida');
 let minas = new Array();
+let nfilas;
+let ncolumnas;
+let nminas;
+let multiplos = new Array();
+let totalCeldas = 0;
+let celdasBlancas = new Array();
+let celdasBlancasUsadas = new Array();
 
 // Opciones del zoom
 
@@ -20,10 +27,10 @@ document.getElementById('z200').addEventListener('click', function(){
     document.body.style.zoom = '2';
 });
 
-const dificultad = document.getElementById('dificultad');
+let dificultad = document.getElementById('dificultad');
 dificultad.addEventListener("change", mostrarDivPersonalizado);
 
-const personalizado = document.getElementById('personalizado');
+let personalizado = document.getElementById('personalizado');
 
 function mostrarDivPersonalizado() {
     if (dificultad.value === "personalizado") {
@@ -52,16 +59,17 @@ function crearTablero(filas, columnas) {
             columna.addEventListener("click", function() {
                 destaparCasilla(columna.id);
             });
+            columna.addEventListener("contextmenu", function(event) {
+                console.log(contador);
+                event.preventDefault();
+                ponerBanderita(contador.toString());
+            });
             contador++;
         }
     }
 }
 
 function rellenarMinas(nbombas, filas, columnas) {
-    let fila;
-    let celda;
-    let idMina;
-    let totalCeldas = filas * columnas;
 
     for (let i = 0; i < nbombas;) {
         let randomNum = Math.floor(Math.random() * (totalCeldas));
@@ -75,6 +83,10 @@ function rellenarMinas(nbombas, filas, columnas) {
     console.log(minas);
 }
 
+function ponerBanderita(id) {
+    document.getElementById(id).style.backgroundColor = "yellow";
+}
+
 function destaparCasilla(id) {
 
     if (minas.includes(id)) {
@@ -84,50 +96,342 @@ function destaparCasilla(id) {
         });
 
     }else{
-        calcularBombasVecinas(id);
+        destaparAutomatico(parseInt(id));
     }
 
 }
 
-function calcularBombasVecinas(id) {
+function destaparAutomatico(id) {
+
+    let up = false;
+    let down = false;
+    let right = false;
+    let left = false;
+
+    // Calcular si la casilla esta en algun borde o esquina
+
+    if (multiplos.includes(id + 1)) {
+        console.log("derecha");
+        right = true;
+    }
+
+    if (multiplos.includes(id)) {
+        console.log("izquierda");
+        left = true;
+    }
+
+    if ( (id - ncolumnas) < 0) {
+        console.log("arriba");
+        up = true;
+    }
+    if ((id + ncolumnas) >= totalCeldas ) {
+        console.log("abajo");
+        down = true;
+    }
     
+    if (calcularBombasVecinas(id) === 0) {
+
+        if (up && left) {
+            calcularBombasVecinas(id + 1);
+            calcularBombasVecinas(id + ncolumnas + 1);
+            calcularBombasVecinas(id + ncolumnas);
+        }else if (up && right) {
+            calcularBombasVecinas(id - 1);
+            calcularBombasVecinas(id + ncolumnas - 1);
+            calcularBombasVecinas(id + ncolumnas);
+        }else if (down && left) {
+            calcularBombasVecinas(id - ncolumnas);
+            calcularBombasVecinas(id - ncolumnas + 1);
+            calcularBombasVecinas(id + 1);
+        }else if (down && right) {
+            calcularBombasVecinas(id - ncolumnas);
+            calcularBombasVecinas(id - ncolumnas - 1);
+            calcularBombasVecinas(id - 1);
+        
+        }else if (up) {
+            calcularBombasVecinas(id - 1);
+            calcularBombasVecinas(id + ncolumnas - 1);
+            calcularBombasVecinas(id + ncolumnas);
+            calcularBombasVecinas(id + ncolumnas + 1);
+            calcularBombasVecinas(id + 1);
+        }else if (down) {
+            calcularBombasVecinas(id - 1);
+            calcularBombasVecinas(id - ncolumnas - 1);
+            calcularBombasVecinas(id - ncolumnas);
+            calcularBombasVecinas(id - ncolumnas + 1);
+            calcularBombasVecinas(id + 1);
+        }else if (left) {
+            calcularBombasVecinas(id - ncolumnas);
+            calcularBombasVecinas(id - ncolumnas + 1);
+            calcularBombasVecinas(id + 1);
+            calcularBombasVecinas(id + ncolumnas + 1);
+            calcularBombasVecinas(id + ncolumnas);
+        }else if (right) {
+            calcularBombasVecinas(id - ncolumnas);
+            calcularBombasVecinas(id - ncolumnas - 1);
+            calcularBombasVecinas(id - 1);
+            calcularBombasVecinas(id + ncolumnas - 1);
+            calcularBombasVecinas(id + ncolumnas);
+        }else{
+            calcularBombasVecinas(id - ncolumnas);
+            calcularBombasVecinas(id - ncolumnas + 1);
+            calcularBombasVecinas(id + 1);
+            calcularBombasVecinas(id + ncolumnas + 1);
+            calcularBombasVecinas(id + ncolumnas);
+            calcularBombasVecinas(id + ncolumnas - 1);
+            calcularBombasVecinas(id - 1);
+            calcularBombasVecinas(id - ncolumnas - 1);
+        }
+
+        celdasBlancasUsadas = celdasBlancasUsadas.concat(celdasBlancas);
+        celdasBlancas.shift();
+    
+        if (celdasBlancas.length != 0) {
+            destaparAutomatico(celdasBlancas[0]);
+        }
+    }
+
+
+}
+
+function calcularBombasVecinas(id) {
+
+    let contador = 0;
+
+    let up = false;
+    let down = false;
+    let right = false;
+    let left = false;
+
+    // Calcular si la casilla esta en algun borde o esquina
+
+    if (multiplos.includes(id + 1)) {
+        console.log("derecha");
+        right = true;
+    }
+
+    if (multiplos.includes(id)) {
+        console.log("izquierda");
+        left = true;
+    }
+
+    if ( (id - ncolumnas) < 0) {
+        console.log("arriba");
+        up = true;
+    }
+    if ((id + ncolumnas) >= totalCeldas ) {
+        console.log("abajo");
+        down = true;
+    }
+
+    // Calcular el numero de minas de la casilla dependiendo de la posicion (borde , esquina o centro)
+
+
+    if (up && left) {
+        if (tieneMina(id + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas)) {
+            contador++;
+        }
+    }else if (up && right) {
+        if (tieneMina(id - 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas)) {
+            contador++;
+        }
+        
+    }else if (down && left) {
+        if (tieneMina(id - ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + 1)) {
+            contador++;
+        }
+        
+    }else if (down && right) {
+        
+        if (tieneMina(id - ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id - 1)) {
+            contador++;
+        }
+        
+    }else if (up) {
+
+        if (tieneMina(id - 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + 1)) {
+            contador++;
+        }
+
+    }else if (down) {
+
+        if (tieneMina(id - 1)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + 1)) {
+            contador++;
+        }
+
+    }else if (left) {
+        if (tieneMina(id - ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas)) {
+            contador++;
+        }
+        
+    }else if (right) {
+        if (tieneMina(id - ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id - 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas)) {
+            contador++;
+        }
+        
+    }else{
+        if (tieneMina(id - ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas + 1)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas)) {
+            contador++;
+        }
+        if (tieneMina(id + ncolumnas - 1)) {
+            contador++;
+        }
+        if (tieneMina(id - 1)) {
+            contador++;
+        }
+        if (tieneMina(id - ncolumnas - 1)) {
+            contador++;
+        }
+    }
+
+    if (contador === 0) {
+        document.getElementById(id).style.backgroundColor = "white";
+        if (!celdasBlancasUsadas.includes(id)) {
+            celdasBlancas.push(id);
+        }
+    }else{
+        document.getElementById(id).innerHTML = contador;
+    }
+
+    return contador;
+}
+
+function tieneMina(id) {
+    if (minas.includes(id.toString())) {
+        return true;
+    }else{
+        return false;
+    }
 }
 
 function iniciarPartida() {
     let dificultad = document.getElementById('dificultad').value;
-    let filas = 0;
-    let columnas = 0;
-    let nbombas = 0;
     let creaTablero = true;
 
     if (dificultad === "personalizado") {
 
-        filas = document.getElementById("filas").value;
-        columnas = document.getElementById("columnas").value;
-        nbombas = document.getElementById("nbombas").value;
+        nfilas = parseInt(document.getElementById("filas").value);
+        ncolumnas = parseInt(document.getElementById("columnas").value);
+        nminas = parseInt(document.getElementById("nbombas").value);
 
-        if (filas == 0 || columnas == 0 || nbombas == 0) {
+
+        if (nfilas == 0 || ncolumnas == 0 || nminas == 0) {
             document.getElementById("errorCampos").classList.add("errorCamposActivo");
             creaTablero = false;
         }
     }else{
         let dificultadArray = dificultad.split("x");
-        filas = dificultadArray[0];
-        columnas = dificultadArray[1];
-        nbombas = dificultadArray[2];
+        nfilas = parseInt(dificultadArray[0]);
+        ncolumnas = parseInt(dificultadArray[1]);
+        nminas = parseInt(dificultadArray[2]);
     }
 
     if (creaTablero) {
+        calcularMultiplos(nfilas, ncolumnas);
+        totalCeldas = nfilas * ncolumnas;
         divDatosPartida.classList.add("hidden");
-        crearTablero(filas, columnas);
-        rellenarMinas(nbombas, filas, columnas);
+        crearTablero(nfilas, ncolumnas);
+        rellenarMinas(nminas, nfilas, ncolumnas);
+    }
+}
+
+function calcularMultiplos(filas, columnas) {
+
+    let multiplo = 0;
+    multiplos.push(multiplo);
+
+    for (let i = 0; i < filas; i++) {
+        multiplo += columnas;
+        multiplos.push(multiplo);
     }
 }
 
 function juego() {
     
-    
-
 }
 
 function derrota() {
