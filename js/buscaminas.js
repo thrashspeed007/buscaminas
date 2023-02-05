@@ -1,3 +1,5 @@
+// Autor : Adrián García
+
 let hamburgerMenu = document.getElementById('hamburger-menu');
 let nav = document.getElementById('nav');
 let divJuego = document.getElementById('divJuego');
@@ -60,9 +62,8 @@ function crearTablero(filas, columnas) {
                 destaparCasilla(columna.id);
             });
             columna.addEventListener("contextmenu", function(event) {
-                console.log(contador);
                 event.preventDefault();
-                ponerBanderita(contador.toString());
+                ponerBanderita(columna.id);
             });
             contador++;
         }
@@ -74,17 +75,14 @@ function rellenarMinas(nbombas, filas, columnas) {
     for (let i = 0; i < nbombas;) {
         let randomNum = Math.floor(Math.random() * (totalCeldas));
         if (!minas.includes(randomNum)) {
-            console.log(randomNum);
             i++;
             minas.push(randomNum.toString());
-            console.log(randomNum);
         }
     }
-    console.log(minas);
 }
 
 function ponerBanderita(id) {
-    document.getElementById(id).style.backgroundColor = "yellow";
+    document.getElementById(id).classList.toggle("bandera");
 }
 
 function destaparCasilla(id) {
@@ -111,21 +109,17 @@ function destaparAutomatico(id) {
     // Calcular si la casilla esta en algun borde o esquina
 
     if (multiplos.includes(id + 1)) {
-        console.log("derecha");
         right = true;
     }
 
     if (multiplos.includes(id)) {
-        console.log("izquierda");
         left = true;
     }
 
     if ( (id - ncolumnas) < 0) {
-        console.log("arriba");
         up = true;
     }
     if ((id + ncolumnas) >= totalCeldas ) {
-        console.log("abajo");
         down = true;
     }
     
@@ -206,21 +200,17 @@ function calcularBombasVecinas(id) {
     // Calcular si la casilla esta en algun borde o esquina
 
     if (multiplos.includes(id + 1)) {
-        console.log("derecha");
         right = true;
     }
 
     if (multiplos.includes(id)) {
-        console.log("izquierda");
         left = true;
     }
 
     if ( (id - ncolumnas) < 0) {
-        console.log("arriba");
         up = true;
     }
     if ((id + ncolumnas) >= totalCeldas ) {
-        console.log("abajo");
         down = true;
     }
 
@@ -398,11 +388,15 @@ function iniciarPartida() {
         ncolumnas = parseInt(document.getElementById("columnas").value);
         nminas = parseInt(document.getElementById("nbombas").value);
 
-
-        if (nfilas == 0 || ncolumnas == 0 || nminas == 0) {
+        if (nfilas == 0 || ncolumnas == 0 || nminas == 0 || isNaN(nfilas) || isNaN(ncolumnas) || isNaN(nminas)) {
+            document.getElementById("errorCampos").classList.add("errorCamposActivo");
+            creaTablero = false;
+        }else if (nminas > (nfilas/2) * (ncolumnas/2)) {
+            document.getElementById("errorCampos").innerHTML = "El numero de minas introducido no es correcto, intentalo con un número menor"
             document.getElementById("errorCampos").classList.add("errorCamposActivo");
             creaTablero = false;
         }
+
     }else{
         let dificultadArray = dificultad.split("x");
         nfilas = parseInt(dificultadArray[0]);
