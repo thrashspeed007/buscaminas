@@ -82,14 +82,16 @@ function rellenarMinas(nbombas, filas, columnas) {
 }
 
 function ponerBanderita(id) {
-    document.getElementById(id).classList.toggle("bandera");
+    if (!document.getElementById(id).hasChildNodes() && !document.getElementById(id).classList.contains("celdaLibre")) {
+        document.getElementById(id).classList.toggle("bandera");
+    }
 }
 
 function destaparCasilla(id) {
 
     if (minas.includes(id)) {
         minas.forEach(element => {
-            document.getElementById(element).style.backgroundColor = "red";
+            document.getElementById(element).classList.add("bomba");
             derrota();
         });
 
@@ -359,12 +361,31 @@ function calcularBombasVecinas(id) {
     }
 
     if (contador === 0) {
-        document.getElementById(id).style.backgroundColor = "white";
+        document.getElementById(id).classList.add("celdaLibre");
         if (!celdasBlancasUsadas.includes(id)) {
             celdasBlancas.push(id);
         }
     }else{
-        document.getElementById(id).innerHTML = contador;
+        switch (contador) {
+            case 1:
+                document.getElementById(id).innerHTML = "<span style='color: blue'>" + contador + "</span>";        
+                break;
+            case 2:
+                document.getElementById(id).innerHTML = "<span style='color: yellow'>" + contador + "</span>";        
+                break;
+            case 3:
+                document.getElementById(id).innerHTML = "<span style='color: orange'>" + contador + "</span>";        
+                break;
+            case 4:
+                document.getElementById(id).innerHTML = "<span style='color: purple'>" + contador + "</span>";        
+                break;
+        
+            default:
+
+            break;
+        }
+        document.getElementById(id).classList.remove("bandera");
+        document.getElementById(id).classList.add("celdaConNumero");
     }
 
     return contador;
@@ -429,7 +450,8 @@ function juego() {
 }
 
 function derrota() {
-    document.getElementById('derrota').style.display = "block"
+    document.getElementById('derrota').style.display = "block";
+
 }
 
 function reset() {

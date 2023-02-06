@@ -37,7 +37,8 @@ td{
     width: 30px;
     height: 30px;
     text-align: center;
-    background-color: #a2a2a2;
+    background-image: url(../img/tierra.png);
+    background-size: cover;
 }
 .tablero{
     margin: 0px auto;
@@ -169,7 +170,16 @@ fieldset{
     background-color: #a2a2a2;
     text-align: center;
 }
+.celdaConNumero{
+    background-image: url(../img/tierra.png);
+}
 .bandera{
-    background-color: yellow;
+    background-image: url(../img/banderita.png), url(../img/tierra.png);
+}
+.celdaLibre{
+    background-image: url(../img/ground.png);
+}
+.bomba{
+    background-image: url(../img/bomba.webp), url(../img/ground.png);
 }
 
