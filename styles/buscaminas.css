@@ -57,6 +57,7 @@ td{
     margin-bottom: 10px;
 }
 .divHeader{
+    position: relative;
     text-align: center;
     padding: 10px 0;
 }
@@ -64,27 +65,69 @@ td{
     color: black;
     font-size: 3em;
     cursor: pointer;
-    transition: 0.2s;
 }
 .fa-bars:hover{
-    color: blue;
-    transition: 0.2s;
+    color: blueviolet;
 }
+
+.divFotosDecoracion{
+    position: relative;
+}
+
+.fotosDecoracion img{
+    width: 120px !important;
+    
+}
+.fotosDecoracion{
+    display: none;
+    position: absolute;
+}
+.sans{
+    top: -48px;
+    right: 0;
+}
+.mario{
+    width: fit-content;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+.chompchomp{
+    right: 120px;
+}
+.shovelBros{
+    top: 100px;
+    right: -120px;
+}
+.shovelBros img{
+    width: 450px !important;
+}
+
+/* Estilos boton zoom */
+
 .zoom{
     position: relative;
-    margin: 0 0;
 }
-.zoomOptions{
-    position: absolute;
-    display: none;
-    width: 100%;
+.zoom:hover .botonZoom{
+    animation-name: botonZoom;
+    animation-duration: 0.5s;
 }
+
 .zoomOptions button{
     display: block;
     width: 50px;
+    height: 0px;
+    opacity: 0;
     margin: 0 auto;
+    transition: 0.4s;
 }
-.zoom:hover .zoomOptions{
+.zoomOptions{
+    position: absolute;
+    width: 100%;
+}
+.zoom:hover .zoomOptions button{
+    height: 30px;
+    opacity: 1;
     display: block;
 }
 .nav{
@@ -92,9 +135,28 @@ td{
     margin: 10px auto;
     gap: 10px;
 }
+.nav button{
+    transition: 0.3s;
+}
+.nav button:hover{
+    transition: 0.3s;
+    transform: scale(1.25);
+}
 .active{
     display: flex;
     padding: 1px;
+}
+
+@keyframes botonZoom{
+    25%{
+        transform: rotate(10deg);
+    }
+    50%{
+        transform: rotate(-10deg);
+    }
+    75%{
+        transform: rotate(10deg);
+    }
 }
 
 /* Estilos tablero */
@@ -102,8 +164,8 @@ td{
 .derrota{
     display: none;
     font-family: var(--negrita);
-    width: 60%;
     text-align: center;
+    border: none;
 }
 .celdaConNumero{
     background-image: url(../img/tierra.png);
@@ -133,11 +195,12 @@ td{
     margin: 30px 0;
 }
 .divFormulario{
-    padding: 10px;
-    box-shadow: 0px 0px 5px 3px red;
+    padding: 20px;
+    box-shadow: inset 0px 0px 10px 2px green;
     border: 2px solid black;
     border-radius: 10px;
     max-width: 80%;
+    transition: 0.3s;
 }
 
 #datosPartida div{
@@ -149,14 +212,15 @@ fieldset{
 }
 .personalizado{
     display: none;
+    max-width: 300px;
 }
 .error{
     display: none;
     border: 2px solid;
     color: rgb(168, 8, 8);
-    padding: 5px;
     width: 100%;
-    max-width: 500px;
+    padding: 5px;
+    max-width: 200px;
 }
 .error span{
     font-family: var(--negrita);
@@ -167,6 +231,9 @@ fieldset{
 .personalizado label{
     width: 150px;
     text-align: start;
+}
+.personalizado input{
+    width: 60px;
 }
 .instrucciones{
     width: 80%;
@@ -189,8 +256,9 @@ fieldset{
     border-radius: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 10px 0;
-    box-shadow: 3px 3px 3px greenyellow, -3px -3px 3px greenyellow, 3px -3px 3px greenyellow, -3px 3px 20px greenyellow;
+    box-shadow: 0px 0px 5px 5px greenyellow;
 }
 
 /*Estilos de la explicacion de los iconos*/
@@ -203,13 +271,68 @@ fieldset{
     border: 2px solid black;
     border-radius: 10px;
     margin: 10px 0;
-    box-shadow: 3px 3px 3px greenyellow, -3px -3px 3px greenyellow, 3px -3px 3px greenyellow, -3px 3px 20px greenyellow;
+    box-shadow: 3px 3px black;
 }
 .divFoto img{
     width: 100%;
     max-width: 85px;
     min-width: 40px;
     margin: 5px 0;
+}
+
+/* Estilos div de boton iniciar partida */
+
+.divBotonStart{
+    position: relative;
+}
+
+/* Animacion de megaman */
+
+.megaman{
+    position: absolute;
+    width: 70px;
+    height: 80px;
+    left: -160px;
+    top: -30px;
+    background-image: url(../img/ezgif-5-f9d2c4621f.png);
+    background-size: contain;
+}
+
+.billBala{
+    display: none;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: -90px;
+    top: -10px;
+    background-image: url(../img/billBala.png);
+    background-size: contain;
+}
+
+.billBalaActive{
+    display: block;
+    animation-name: billBala;
+    animation-duration: 0.6s;
+}
+
+.megamanActive{
+    animation-name: megamanShot;
+    animation-duration: 1.2s;
+}
+
+@keyframes billBala{
+    100%{
+        transform: translateX(100px);
+    }
+}
+
+@keyframes megamanShot{
+    0%{
+        background-image: url(../img/222-2222107_megaman-sprites-mega-man-x-charge-shot.png);
+    }
+    100%{
+        background-image: url(../img/222-2222107_megaman-sprites-mega-man-x-charge-shot.png);
+    }
 }
 
 /* Estilos del footer */
@@ -219,3 +342,14 @@ fieldset{
     text-align: center;
 }
 
+@media (min-width: 768px) {
+    #hamburger-menu{
+        display: none;
+    }
+    .nav{
+        display: flex;
+    }
+    .fotosDecoracion{
+        display: block;
+    }
+}

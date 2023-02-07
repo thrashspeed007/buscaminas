@@ -13,14 +13,23 @@
 <body>
     <header>
         <div class="row divHeader justify-content-center align-items-center no-gutters">
-            <div class="col-3">
+            <div class="col-3 divFotosDecoracion">
                 <i class="fa-solid fa-bars" id="hamburger-menu" aria-hidden="true"></i>
+                <div class="fotosDecoracion sans">
+                    <img src="img/sans.png" alt="">
+                </div>
+                <div class="fotosDecoracion chompchomp">
+                    <img src="img/chompchomp.png" alt="">
+                </div>
+                <div class="fotosDecoracion shovelBros">
+                    <img src="img/shovelBros.png" alt="">
+                </div>
             </div>
             <div class="col-6" class="titulo">
                 <h1>BUSCAMINAS</h1>
             </div>
             <div class="col-3 zoom">
-                <button>ZOOM</button>
+                <button class="botonZoom">ZOOM</button>
                 <div class="zoomOptions">
                     <button id="z100">1</button>
                     <button id="z125">1.25</button>
@@ -32,14 +41,13 @@
         <div class="row justify-content-center no-gutters">
             <img class="logo" src="img/bomba.webp" alt="">
         </div>
-    </header>
-    <main> 
-        <nav class="nav row justify-content-center no-gutters" id="nav">
+        <nav class="nav row justify-content-center no-gutters p-2" id="nav">
             <button>Juego 1</button> 
             <button>Juego 2</button>
             <button>Juego 3</button>
         </nav>
-
+    </header>
+    <main>
         <div class="instrucciones">
             <div class="reglas">
                 <h2>Reglas del juego</h2>
@@ -48,7 +56,10 @@
                         <p>El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.</p>
                     </div>
                     <div class="col-md-5 divRegla">
-                        <p>Algunas casillas tienen un número, este número indica las minas que son en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con minas y 5 sin minas. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y estas se descubren automáticamente.</p>
+                        <p>Algunas casillas tienen un número, este número indica las minas que hay en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con minas y 5 sin minas. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y estas se descubren automáticamente.</p>
+                    </div>
+                    <div class="fotosDecoracion mario">
+                        <img src="img/mario.png" alt="">
                     </div>
                     <div class="col-md-5 divRegla">
                         <p>Si se descubre una casilla con una mina se pierde la partida.</p>
@@ -73,7 +84,7 @@
                         <img src="img/bomba.webp" alt="">
                     </div>
                     <div class="col-10">
-                        <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego</p>
+                        <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego.</p>
                     </div>
                 </div>
                 <div class="row filaIcono align-items-center">
@@ -88,10 +99,13 @@
 
         </div>
 
-        <form action="">
+        
             <div id="datosPartida" class="d-flex flex-column align-items-center">
-                <div class="divFormulario">
+
+                <div class="divFormulario" id="divFormulario">
                     <div>
+                <form action="">
+
                         <label for="filas">Dificultad: </label>
                         <select name="dificultad" id="dificultad">
                             <option value="10x10x10">Fácil</option>
@@ -118,16 +132,25 @@
                                 <input type="number" id="nbombas">
                             </div>
                         </fieldset>
+
+                </form>
                     </div>
-    
-                    <button type="button" onclick="iniciarPartida()">Iniciar Partida</button>
+                    
+                    <div class="divBotonStart">
+                        <div class="megaman" id="megaman">
+                    
+                        </div>
+                        <div class="billBala" id="billBala">
+
+                        </div>
+                        <button id="botonStart" type="button">Iniciar Partida</button>
+                    </div>
                 </div>
             </div>
-        </form>
 
         <div class="divJuego d-flex justify-content-center m-3 flex-column" id="divJuego">
-            <div class="derrota error m-1 mx-auto" id="derrota">
-                <span>¡Lo siento, has perdido!</span>
+            <div class="error derrota m-1 mx-auto" id="derrota">
+                <span>GAME OVER</span>
             </div>
             <div>
                 <table id="tablero" class="tablero">

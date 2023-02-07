@@ -5,6 +5,7 @@ let nav = document.getElementById('nav');
 let divJuego = document.getElementById('divJuego');
 let tablero = document.getElementById('tablero');
 let divDatosPartida = document.getElementById('datosPartida');
+let divFormulario = document.getElementById('divFormulario');
 let minas = new Array();
 let nfilas;
 let ncolumnas;
@@ -13,6 +14,28 @@ let multiplos = new Array();
 let totalCeldas = 0;
 let celdasBlancas = new Array();
 let celdasBlancasUsadas = new Array();
+let megaman = document.getElementById('megaman');
+let billBala = document.getElementById('billBala');
+let botonStart = document.getElementById('botonStart');
+
+botonStart.addEventListener("click", iniciarPartida);
+
+// Animacion de megaman
+
+function empezarPartida() {
+    megaman.classList.add("megamanActive");
+    setTimeout(function() {
+        billBala.classList.add("billBalaActive");
+    }, 500)
+    setTimeout(function() {    
+        calcularMultiplos(nfilas, ncolumnas);
+        totalCeldas = nfilas * ncolumnas;
+        divDatosPartida.classList.add("hidden");
+        crearTablero(nfilas, ncolumnas);
+        rellenarMinas(nminas, nfilas, ncolumnas);
+        console.log("xd");
+    }, 1000);
+}
 
 // Opciones del zoom
 
@@ -29,25 +52,54 @@ document.getElementById('z200').addEventListener('click', function(){
     document.body.style.zoom = '2';
 });
 
+// Opciones de la dificultad
+
 let dificultad = document.getElementById('dificultad');
 dificultad.addEventListener("change", mostrarDivPersonalizado);
 
 let personalizado = document.getElementById('personalizado');
 
 function mostrarDivPersonalizado() {
-    if (dificultad.value === "personalizado") {
-        personalizado.style.display = "flex"
+    let nivelDificultad = dificultad.value;
+
+    switch (nivelDificultad) {
+        case "10x10x10":
+            divFormulario.style.boxShadow = "inset 0px 0px 10px 2px green";
+            break;
+        case "15x20x40":
+            divFormulario.style.boxShadow = "inset 0px 0px 10px 2px yellow";
+            break;
+        case "15x30x90":
+            divFormulario.style.boxShadow = "inset 0px 0px 10px 2px red";
+            break;
+        case "personalizado":
+            divFormulario.style.boxShadow = "inset 0px 0px 10px 2px white";
+            break;
+
+        default:
+            break;
+    }
+
+    if (nivelDificultad === "personalizado") {
+        personalizado.style.display = "flex";
     }else{
-        personalizado.style.display = "none"
+        personalizado.style.display = "none";
+    }
+
+    if (dificultad.value) {
+        
     }
 }
 
 // Menú responsive de hamburguesa
+
 hamburgerMenu.addEventListener("click", menuResponsive);
 
 function menuResponsive() {
     nav.classList.toggle("active");
 }
+
+// Crear tabla del buscaminas
 
 function crearTablero(filas, columnas) {
 
@@ -400,6 +452,7 @@ function tieneMina(id) {
 }
 
 function iniciarPartida() {
+
     let dificultad = document.getElementById('dificultad').value;
     let creaTablero = true;
 
@@ -409,12 +462,16 @@ function iniciarPartida() {
         ncolumnas = parseInt(document.getElementById("columnas").value);
         nminas = parseInt(document.getElementById("nbombas").value);
 
-        if (nfilas == 0 || ncolumnas == 0 || nminas == 0 || isNaN(nfilas) || isNaN(ncolumnas) || isNaN(nminas)) {
+        if (isNaN(nfilas) || isNaN(ncolumnas) || isNaN(nminas)) {
             document.getElementById("errorCampos").innerHTML = "<span>Rellena todos los campos porfavor</span>"
             document.getElementById("errorCampos").classList.add("errorCamposActivo");
             creaTablero = false;
         }else if (nminas > (nfilas/2) * (ncolumnas/2)) {
-            document.getElementById("errorCampos").innerHTML = "<span>El numero de minas introducido no es correcto, intentalo con un número menor</span>"
+            document.getElementById("errorCampos").innerHTML = "<span>El numero de minas introducido no es correcto. Intentalo con un número menor</span>"
+            document.getElementById("errorCampos").classList.add("errorCamposActivo");
+            creaTablero = false;
+        }else if (nfilas == 0 || ncolumnas == 0 || nminas == 0) {
+            document.getElementById("errorCampos").innerHTML = "<span>Los valores tienen que ser mayores que 0</span>"
             document.getElementById("errorCampos").classList.add("errorCamposActivo");
             creaTablero = false;
         }
@@ -427,11 +484,7 @@ function iniciarPartida() {
     }
 
     if (creaTablero) {
-        calcularMultiplos(nfilas, ncolumnas);
-        totalCeldas = nfilas * ncolumnas;
-        divDatosPartida.classList.add("hidden");
-        crearTablero(nfilas, ncolumnas);
-        rellenarMinas(nminas, nfilas, ncolumnas);
+        empezarPartida();
     }
 }
 
