@@ -16,7 +16,7 @@
             <div class="col-3">
                 <i class="fa-solid fa-bars" id="hamburger-menu" aria-hidden="true"></i>
             </div>
-            <div class="col-6">
+            <div class="col-6" class="titulo">
                 <h1>BUSCAMINAS</h1>
             </div>
             <div class="col-3 zoom">
@@ -41,12 +41,22 @@
         </nav>
 
         <div class="instrucciones">
-            <h2>Reglas del juego</h2>
-            <div class="d-flex flex-column flex-md-row reglas">
-                <p>El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.</p>
-                <p>Algunas casillas tienen un número, este número indica las minas que son en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con minas y 5 sin minas. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y estas se descubren automáticamente.</p>
-                <p>Si se descubre una casilla con una mina se pierde la partida.</p>
-                <p>Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.</p>
+            <div class="reglas">
+                <h2>Reglas del juego</h2>
+                <div class="row flex-column flex-md-row flex-wrap justify-content-between">
+                    <div class="col-md-5 divRegla">
+                        <p>El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.</p>
+                    </div>
+                    <div class="col-md-5 divRegla">
+                        <p>Algunas casillas tienen un número, este número indica las minas que son en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con minas y 5 sin minas. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y estas se descubren automáticamente.</p>
+                    </div>
+                    <div class="col-md-5 divRegla">
+                        <p>Si se descubre una casilla con una mina se pierde la partida.</p>
+                    </div>
+                    <div class="col-md-5 divRegla">
+                        <p>Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.</p>
+                    </div>
+                </div>
             </div>
             <div class="d-flex flex-column iconos">
                 <h2>Explicación de los iconos</h2>
@@ -71,7 +81,7 @@
                         <img src="img/banderita.png" alt="">
                     </div>
                     <div class="col-10">
-                        <p>Las banderas como esta sirven para marcar una casilla en la que crees que hay una mina. De esta forma puedes ir destapando las demas casillas y ver mejor el tablero.</p>
+                        <p>Las banderas como esta sirven para marcar una casilla en la que crees que hay una mina. De esta forma puedes ir destapando las demás casillas y ver mejor el tablero.</p>
                     </div>
                 </div>
             </div>
@@ -80,7 +90,7 @@
 
         <form action="">
             <div id="datosPartida" class="d-flex flex-column align-items-center">
-                <div>
+                <div class="divFormulario">
                     <div>
                         <label for="filas">Dificultad: </label>
                         <select name="dificultad" id="dificultad">
@@ -109,19 +119,21 @@
                             </div>
                         </fieldset>
                     </div>
-                </div>
     
-                <button type="button" onclick="iniciarPartida()">Iniciar Partida</button>
+                    <button type="button" onclick="iniciarPartida()">Iniciar Partida</button>
+                </div>
             </div>
         </form>
 
-        <div class="divJuego d-flex justify-content-center flex-column" id="divJuego">
-            <div class="derrota error" id="derrota">
+        <div class="divJuego d-flex justify-content-center m-3 flex-column" id="divJuego">
+            <div class="derrota error m-1 mx-auto" id="derrota">
                 <span>¡Lo siento, has perdido!</span>
             </div>
-            <table id="tablero" class="tablero">
+            <div>
+                <table id="tablero" class="tablero">
 
-            </table>
+                </table>
+            </div>
         </div>
 
     </main>

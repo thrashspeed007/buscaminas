@@ -19,8 +19,14 @@
     --negrita: retroBold, sans-serif;
 }
 
+body{
+    background-color: rgb(140, 127, 216);
+    color: white;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-family: var(--negrita);
+    text-shadow: 4px 4px black;
     
 }
 *{
@@ -40,15 +46,12 @@ td{
     background-image: url(../img/tierra.png);
     background-size: cover;
 }
-.tablero{
-    margin: 0px auto;
-}
-.row img{
-    width: 150px;
-}
-.row h1{
-    margin: 0 0;
 
+/* Estilos header */
+
+
+.tablero{
+    margin: 0 auto;
 }
 .logo{
     margin-bottom: 10px;
@@ -56,25 +59,6 @@ td{
 .divHeader{
     text-align: center;
     padding: 10px 0;
-}
-.divJuego{
-    margin: 10px auto;
-    width: 80%;
-}
-.derrota{
-    display: none;
-    margin: 10px auto;
-    font-family: var(--negrita);
-}
-
-.nav{
-    display: none;
-    margin: 10px auto;
-    gap: 10px;
-}
-.active{
-    display: flex;
-    padding: 1px;
 }
 .fa-bars{
     color: black;
@@ -103,13 +87,64 @@ td{
 .zoom:hover .zoomOptions{
     display: block;
 }
+.nav{
+    display: none;
+    margin: 10px auto;
+    gap: 10px;
+}
+.active{
+    display: flex;
+    padding: 1px;
+}
+
+/* Estilos tablero */
+
+.derrota{
+    display: none;
+    font-family: var(--negrita);
+    width: 60%;
+    text-align: center;
+}
+.celdaConNumero{
+    background-image: url(../img/tierra.png);
+}
+.bandera{
+    background-image: url(../img/banderita.png), url(../img/tierra.png);
+}
+.celdaLibre{
+    background-image: url(../img/ground.png);
+}
+.bomba{
+    background-image: url(../img/bomba.webp), url(../img/ground.png);
+}
+
+/* Estilos  instrucciones */
+.row img{
+    width: 150px;
+}
+.row h1{
+    margin: 0 0;
+}
+
+
+/* Estilos formulario de dificultad */
+
+#datosPartida{
+    margin: 30px 0;
+}
+.divFormulario{
+    padding: 10px;
+    box-shadow: 0px 0px 5px 3px red;
+    border: 2px solid black;
+    border-radius: 10px;
+    max-width: 80%;
+}
 
 #datosPartida div{
     text-align: center;
     margin: 5px auto;
 }
 fieldset{
-    border: 1px solid black;
     padding: 10px;
 }
 .personalizado{
@@ -117,9 +152,11 @@ fieldset{
 }
 .error{
     display: none;
-    border: 1px solid;
-    color: red;
+    border: 2px solid;
+    color: rgb(168, 8, 8);
     padding: 5px;
+    width: 100%;
+    max-width: 500px;
 }
 .error span{
     font-family: var(--negrita);
@@ -147,8 +184,13 @@ fieldset{
 
 /*Estilos para las reglas del juego*/
 
-.reglas p{
-    border: 1px solid black;
+.divRegla{
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    box-shadow: 3px 3px 3px greenyellow, -3px -3px 3px greenyellow, 3px -3px 3px greenyellow, -3px 3px 20px greenyellow;
 }
 
 /*Estilos de la explicacion de los iconos*/
@@ -158,28 +200,22 @@ fieldset{
 }
 
 .filaIcono{
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 3px 3px 3px greenyellow, -3px -3px 3px greenyellow, 3px -3px 3px greenyellow, -3px 3px 20px greenyellow;
 }
 .divFoto img{
     width: 100%;
     max-width: 85px;
     min-width: 40px;
+    margin: 5px 0;
 }
+
+/* Estilos del footer */
 
 .divFooter{
     background-color: #a2a2a2;
     text-align: center;
-}
-.celdaConNumero{
-    background-image: url(../img/tierra.png);
-}
-.bandera{
-    background-image: url(../img/banderita.png), url(../img/tierra.png);
-}
-.celdaLibre{
-    background-image: url(../img/ground.png);
-}
-.bomba{
-    background-image: url(../img/bomba.webp), url(../img/ground.png);
 }
 

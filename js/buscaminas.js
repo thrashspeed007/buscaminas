@@ -410,10 +410,11 @@ function iniciarPartida() {
         nminas = parseInt(document.getElementById("nbombas").value);
 
         if (nfilas == 0 || ncolumnas == 0 || nminas == 0 || isNaN(nfilas) || isNaN(ncolumnas) || isNaN(nminas)) {
+            document.getElementById("errorCampos").innerHTML = "<span>Rellena todos los campos porfavor</span>"
             document.getElementById("errorCampos").classList.add("errorCamposActivo");
             creaTablero = false;
         }else if (nminas > (nfilas/2) * (ncolumnas/2)) {
-            document.getElementById("errorCampos").innerHTML = "El numero de minas introducido no es correcto, intentalo con un número menor"
+            document.getElementById("errorCampos").innerHTML = "<span>El numero de minas introducido no es correcto, intentalo con un número menor</span>"
             document.getElementById("errorCampos").classList.add("errorCamposActivo");
             creaTablero = false;
         }
