@@ -149,17 +149,14 @@ td{
     text-align: center;
     border: none;
 }
-.celdaConNumero{
-    background-image: url(../img/tierra.png);
-}
 .bandera{
-    background-image: url(../img/banderita.png), url(../img/tierra.png);
+    background-image: url(../img/banderita.png), url(../img/tierra.png) !important;
 }
 .celdaLibre{
-    background-image: url(../img/ground.png);
+    background-image: url(../img/ground.png) !important;
 }
 .bomba{
-    background-image: url(../img/bomba.webp), url(../img/ground.png);
+    background-image: url(../img/bomba.webp), url(../img/ground.png) !important;
 }
 
 /* Estilos  instrucciones */
@@ -251,7 +248,8 @@ fieldset{
 
 .filaIcono{
     border: 2px solid black;
-    border-radius: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     margin: 10px 0;
     box-shadow: 3px 3px black;
 }
@@ -269,18 +267,20 @@ fieldset{
 }
 
 /* Estilos tablero */
+
 .tablero{
-    display: flex;
-    flex-direction: column;
+    max-width: 100%;
 }
 .fila{
     display: flex;
     flex-direction: row;
 }
 .casilla{
+    display: flex;
     width: 30px;
     height: 30px;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
     background-image: url(../img/tierra.png);
     background-size: cover;
     border: 1px solid black;
