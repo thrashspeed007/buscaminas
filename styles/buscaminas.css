@@ -70,40 +70,24 @@ td{
     color: blueviolet;
 }
 
-.divFotosDecoracion{
-    position: relative;
-}
-
-.fotosDecoracion img{
+.peque img{
     width: 120px !important;
-    
 }
 .fotosDecoracion{
     display: none;
-    position: absolute;
-}
-.sans{
-    top: -48px;
-    right: 0;
-}
-.mario{
-    width: fit-content;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-}
-.chompchomp{
-    right: 120px;
-}
-.shovelBros{
-    top: 100px;
-    right: -120px;
 }
 .shovelBros img{
     width: 450px !important;
 }
+.princeofpersia img{
+    width: 500px !important;;
+}
 
 /* Estilos boton zoom */
+
+.absolute{
+    position: absolute;
+}
 
 .zoom{
     position: relative;
@@ -112,7 +96,6 @@ td{
     animation-name: botonZoom;
     animation-duration: 0.5s;
 }
-
 .zoomOptions button{
     display: block;
     width: 50px;
@@ -129,6 +112,9 @@ td{
     height: 30px;
     opacity: 1;
     display: block;
+}
+.noHover{
+    pointer-events: none;
 }
 .nav{
     display: none;
@@ -236,7 +222,7 @@ fieldset{
     width: 60px;
 }
 .instrucciones{
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     text-align: center;
 }
@@ -350,6 +336,6 @@ fieldset{
         display: flex;
     }
     .fotosDecoracion{
-        display: block;
+        display: flex;
     }
 }

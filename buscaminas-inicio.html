@@ -15,31 +15,39 @@
         <div class="row divHeader justify-content-center align-items-center no-gutters">
             <div class="col-3 divFotosDecoracion">
                 <i class="fa-solid fa-bars" id="hamburger-menu" aria-hidden="true"></i>
-                <div class="fotosDecoracion sans">
-                    <img src="img/sans.png" alt="">
-                </div>
-                <div class="fotosDecoracion chompchomp">
-                    <img src="img/chompchomp.png" alt="">
-                </div>
-                <div class="fotosDecoracion shovelBros">
-                    <img src="img/shovelBros.png" alt="">
-                </div>
             </div>
             <div class="col-6" class="titulo">
                 <h1>BUSCAMINAS</h1>
             </div>
             <div class="col-3 zoom">
-                <button class="botonZoom">ZOOM</button>
-                <div class="zoomOptions">
-                    <button id="z100">1</button>
-                    <button id="z125">1.25</button>
-                    <button id="z150">1.5</button>
-                    <button id="z200">2</button>
-                </div>
+                    <button class="botonZoom">ZOOM</button>
+                    <div class="zoomOptions">
+                        <button id="z100">1</button>
+                        <button id="z125">1.25</button>
+                        <button id="z150">1.5</button>
+                        <button id="z200">2</button>
+                    </div>
             </div>
         </div>
         <div class="row justify-content-center no-gutters">
-            <img class="logo" src="img/bomba.webp" alt="">
+            <div class="col-4">
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="fotosDecoracion align-items-center chompchomp">
+                        <img src="img/chompchomp.png" alt="">
+                    </div>
+                    <div class="fotosDecoracion align-items-center sans">
+                        <img src="img/sans.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-flex justify-content-center">
+                    <img class="logo" src="img/bomba.webp" alt="">
+                </div>
+            </div>
+            <div class="col-4 noHover">
+                
+            </div>
         </div>
         <nav class="nav row justify-content-center no-gutters p-2" id="nav">
             <button>Juego 1</button> 
@@ -55,14 +63,21 @@
                     <div class="col-md-5 divRegla">
                         <p>El juego consiste en despejar todas las casillas de una pantalla que no oculten una mina.</p>
                     </div>
+                    <div class="col-md-2">
+                        <div class="fotosDecoracion peque justify-content-center align-items-center">
+                            <img src="img/mario.png" alt="">
+                        </div>
+                    </div>
                     <div class="col-md-5 divRegla">
                         <p>Algunas casillas tienen un número, este número indica las minas que hay en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 con minas y 5 sin minas. Si se descubre una casilla sin número indica que ninguna de las casillas vecinas tiene mina y estas se descubren automáticamente.</p>
                     </div>
-                    <div class="fotosDecoracion mario">
-                        <img src="img/mario.png" alt="">
-                    </div>
                     <div class="col-md-5 divRegla">
                         <p>Si se descubre una casilla con una mina se pierde la partida.</p>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="fotosDecoracion peque justify-content-center">
+                            <img src="img/link.png" alt="">
+                        </div>
                     </div>
                     <div class="col-md-5 divRegla">
                         <p>Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.</p>
@@ -79,12 +94,22 @@
                         <p>Este icono sirve para reiniciar la partida al darle clic. También, si logras la victoria la carita se pondrá unas gafas de sol B).</p>
                     </div>
                 </div>
+                <div class="row justify-content-center">
+                    <div class="fotosDecoracion shovelBros">
+                        <img src="img/shovelBros.png" alt="">
+                    </div>
+                </div>
                 <div class="row filaIcono align-items-center">
                     <div class="divFoto col-2">
                         <img src="img/bomba.webp" alt="">
                     </div>
                     <div class="col-10">
                         <p>La representación de una bomba o mina. Si clicas en una casilla que contenga una bomba, perderás el juego.</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="fotosDecoracion princeofpersia">
+                        <img src="img/princeofpersia.gif" alt="">
                     </div>
                 </div>
                 <div class="row filaIcono align-items-center">
