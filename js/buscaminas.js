@@ -33,7 +33,6 @@ function empezarPartida() {
         divDatosPartida.classList.add("hidden");
         crearTablero(nfilas, ncolumnas);
         rellenarMinas(nminas, nfilas, ncolumnas);
-        console.log("xd");
     }, 1000);
 }
 
@@ -104,22 +103,36 @@ function menuResponsive() {
 function crearTablero(filas, columnas) {
 
     let contador = 0;
+    let divString = "";
 
     for (let i = 0; i < filas; i++) {
-        let fila = tablero.insertRow();
+        // let fila = tablero.insertRow();
+        divString += "<div class='fila'>";
+        console.log(contador);
         for (let j = 0; j < columnas; j++) {
-            let columna = fila.insertCell();
-            columna.setAttribute("id", contador);
-            columna.addEventListener("click", function() {
-                destaparCasilla(columna.id);
-            });
-            columna.addEventListener("contextmenu", function(event) {
-                event.preventDefault();
-                ponerBanderita(columna.id);
-            });
+            divString += "<div class='casilla' id='" + contador + "' onclick='destaparCasilla(" + contador.toString() + ")'></div>";
+            // document.getElementById(contador.toString()).addEventListener("click", function() {
+            //     destaparCasilla(contador.toString());
+            // });
+            // document.getElementById(contador.toString()).addEventListener("contextmenu", function(event) {
+            //     event.preventDefault();
+            //     ponerBanderita(contador.toString());
+            // });
+            // let columna = fila.insertCell();
+            // columna.setAttribute("id", contador);
+            // columna.addEventListener("click", function() {
+            //     destaparCasilla(columna.id);
+            // });
+            // columna.addEventListener("contextmenu", function(event) {
+            //     event.preventDefault();
+            //     ponerBanderita(columna.id);
+            // });
             contador++;
         }
+        divString += "</div>";
     }
+    console.log(divString);
+    tablero.innerHTML = divString;
 }
 
 function rellenarMinas(nbombas, filas, columnas) {

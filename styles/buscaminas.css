@@ -49,10 +49,6 @@ td{
 
 /* Estilos header */
 
-
-.tablero{
-    margin: 0 auto;
-}
 .logo{
     margin-bottom: 10px;
 }
@@ -272,6 +268,26 @@ fieldset{
     position: relative;
 }
 
+/* Estilos tablero */
+.tablero{
+    display: flex;
+    flex-direction: column;
+}
+.fila{
+    display: flex;
+    flex-direction: row;
+}
+.casilla{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-image: url(../img/tierra.png);
+    background-size: cover;
+    border: 1px solid black;
+}
+
+
+
 /* Animacion de megaman */
 
 .megaman{
@@ -326,6 +342,11 @@ fieldset{
 .divFooter{
     background-color: #a2a2a2;
     text-align: center;
+    color: black;
+    text-shadow: 1px 1px red;
+}
+.nombreAutor{
+    text-shadow: -1px -1px blue;
 }
 
 @media (min-width: 768px) {
