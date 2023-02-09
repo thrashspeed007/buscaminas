@@ -23,17 +23,26 @@ botonStart.addEventListener("click", iniciarPartida);
 // Animacion de megaman
 
 function empezarPartida() {
-    megaman.classList.add("megamanActive");
-    setTimeout(function() {
-        billBala.classList.add("billBalaActive");
-    }, 500)
-    setTimeout(function() {    
+    if (megaman.style.display === "none") {
         calcularMultiplos(nfilas, ncolumnas);
         totalCeldas = nfilas * ncolumnas;
         divDatosPartida.classList.add("hidden");
         crearTablero(nfilas, ncolumnas);
         rellenarMinas(nminas, nfilas, ncolumnas);
-    }, 1000);
+    }else{
+        console.log(megaman.style.display);
+        megaman.classList.add("megamanActive");
+        setTimeout(function() {
+            billBala.classList.add("billBalaActive");
+        }, 500)
+        setTimeout(function() {    
+            calcularMultiplos(nfilas, ncolumnas);
+            totalCeldas = nfilas * ncolumnas;
+            divDatosPartida.classList.add("hidden");
+            crearTablero(nfilas, ncolumnas);
+            rellenarMinas(nminas, nfilas, ncolumnas);
+        }, 1000);
+    }
 }
 
 // Opciones del zoom

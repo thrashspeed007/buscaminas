@@ -34,21 +34,24 @@ h1,h2,h3,h4,h5,h6{
 }
 
 header{
-    background-color: #a2a2a2;
-}
-table, td{
-    border: 1px solid black;
-}
-td{
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    background-image: url(../img/tierra.png);
-    background-size: cover;
+    /* background-color: #a2a2a2; */
+    background-image: url(../img/fondoHeader.png);
+    background-size: contain;
+    background-repeat: repeat;
 }
 
 /* Estilos header */
 
+.titulo{
+    text-shadow: 0 2px 2px #dfdfdf, 
+      -2px 5px 1px #b8b8b8, 
+      -4px 8px 0px #979797, 
+      -6px 11px 0px #747474,
+      -8px 14px 0px #565656,
+      -10px 17px 0px #343434,
+      -12px 20px 0px #171717,
+      -14px 23px 0px #000;
+}
 .logo{
     margin-bottom: 10px;
 }
@@ -58,7 +61,7 @@ td{
     padding: 10px 0;
 }
 .fa-bars{
-    color: black;
+    color: grey;
     font-size: 3em;
     cursor: pointer;
 }
@@ -115,7 +118,7 @@ td{
 .nav{
     display: none;
     margin: 10px auto;
-    gap: 50px;
+    gap: 20px;
 }
 .nav button{
     transition: 0.3s;
@@ -179,9 +182,6 @@ td{
 
 /* Estilos formulario de dificultad */
 
-#datosPartida{
-    margin: 30px 0;
-}
 .divFormulario{
     padding: 20px;
     box-shadow: inset 0px 0px 10px 2px green;
@@ -191,9 +191,8 @@ td{
     transition: 0.3s;
 }
 
-#datosPartida div{
+.datosPartida div{
     text-align: center;
-    margin: 5px auto;
 }
 fieldset{
     padding: 10px;
@@ -247,6 +246,8 @@ fieldset{
     justify-content: center;
     margin: 10px 0;
     box-shadow: 0px 0px 5px 5px greenyellow;
+    background-color: #5da0db;
+    background-image: linear-gradient(32deg, #5da0db 0%, #b06ee5 100%);
 }
 
 /*Estilos de la explicacion de los iconos*/
@@ -261,6 +262,9 @@ fieldset{
     border-bottom-left-radius: 20px;
     margin: 10px 0;
     box-shadow: 3px 3px black;
+    background-color: #5da0db;
+    background-image: linear-gradient(62deg, #5da0db 0%, #b06ee5 100%);
+
 }
 .divFoto img{
     width: 100%;
@@ -279,30 +283,6 @@ fieldset{
 .botonStart{
     transition: 0.3s;
 }
-.pixel-corners {
-    clip-path: polygon(
-      0px 8px,
-      4px 8px,
-      4px 4px,
-      8px 4px,
-      8px 0px,
-      calc(100% - 8px) 0px,
-      calc(100% - 8px) 4px,
-      calc(100% - 4px) 4px,
-      calc(100% - 4px) 8px,
-      100% 8px,
-      100% calc(100% - 8px),
-      calc(100% - 4px) calc(100% - 8px),
-      calc(100% - 4px) calc(100% - 4px),
-      calc(100% - 8px) calc(100% - 4px),
-      calc(100% - 8px) 100%,
-      8px 100%,
-      8px calc(100% - 4px),
-      4px calc(100% - 4px),
-      4px calc(100% - 8px),
-      0px calc(100% - 8px)
-    );
-  }
 
 /* Estilos tablero */
 
@@ -324,6 +304,10 @@ fieldset{
     background-image: url(../img/tierra.png);
     background-size: cover;
     border: 1px solid black;
+}
+
+.casilla:hover{
+    opacity: 0.5;
 }
 
 /* Animacion de megaman */
@@ -384,7 +368,19 @@ fieldset{
     text-shadow: 1px 1px red;
 }
 .nombreAutor{
-    text-shadow: -1px -1px blue;
+    text-shadow: 1px 1px blue;
+}
+.rrss{
+    background-image: linear-gradient(to right, blue, white);
+}
+.autor{
+    background-color: white;
+}
+.copyright{
+    background-image: linear-gradient(to right, white, blue);
+}
+.rrss img{
+    width: 50px;
 }
 
 @media (min-width: 768px) {
@@ -396,5 +392,14 @@ fieldset{
     }
     .fotosDecoracion{
         display: flex;
+    }
+}
+
+@media (max-width: 600px){
+    .megaman{
+        display: none;
+    }
+    .billBala{
+        display: none;
     }
 }

@@ -12,12 +12,12 @@
 </head>
 <body>
     <header>
-        <div class="row divHeader justify-content-center align-items-center no-gutters">
+        <div class="row divHeader justify-content-center align-items-center no-gutters mb-2">
             <div class="col-3 divFotosDecoracion">
                 <i class="fa-solid fa-bars" id="hamburger-menu" aria-hidden="true"></i>
             </div>
             <div class="col-6" class="titulo">
-                <h1>BUSCAMINAS</h1>
+                <h1 class="titulo">BUSCAMINAS</h1>
             </div>
             <div class="col-3 zoom">
                     <button class="botonZoom">ZOOM</button>
@@ -46,8 +46,8 @@
                 </div>
             </div>
             <div class="col-4 noHover d-flex justify-content-start align-items-center">
-                    <div class="fotosDecoracion sonic">
-                        <img src="img/sonic.png" alt="">
+                    <div class="fotosDecoracion sonic peque">
+                        <img src="img/sonic-pointing.gif" alt="">
                     </div>
             </div>
         </div>
@@ -127,51 +127,48 @@
         </div>
 
         
-            <div id="datosPartida" class="d-flex flex-column align-items-center">
-
+            <div id="datosPartida" class="d-flex flex-column align-items-center mt-5 mb-5 datosPartida">
                 <div class="divFormulario" id="divFormulario">
-                    <div>
-                <form action="">
-
-                        <label for="filas">Dificultad: </label>
-                        <select name="dificultad" id="dificultad">
-                            <option value="10x10x10">Fácil</option>
-                            <option value="15x20x40">Intermedio</option>
-                            <option value="15x30x90">Difícil</option>
-                            <option value="personalizado">Personalizado</option>
-                        </select>
-                    </div>
-                    <div class="personalizado flex-column" id="personalizado">
-                        <div class="error row" id="errorCampos">
-                            <span>Rellena todos los campos porfavor</span>
+                    <form action="">
+                        <div>
+                            <label for="filas">Dificultad: </label>
+                            <select name="dificultad" id="dificultad">
+                                <option value="10x10x10">Fácil</option>
+                                <option value="15x20x40">Intermedio</option>
+                                <option value="15x30x90">Difícil</option>
+                                <option value="personalizado">Personalizado</option>
+                            </select>
                         </div>
-                        <fieldset>
-                            <div>
-                                <label for="filas">Filas:</label>
-                                <input type="number" id="filas">
+                        <div class="personalizado flex-column" id="personalizado">
+                            <div class="error row" id="errorCampos">
+                                <span>Rellena todos los campos porfavor</span>
                             </div>
-                            <div>
-                                <label for="columnas">Columnas:</label>
-                                <input type="number" id="columnas">
-                            </div>
-                            <div>
-                                <label for="bombas">Nº de bombas:</label>
-                                <input type="number" id="nbombas">
-                            </div>
-                        </fieldset>
-
-                </form>
-                    </div>
-                    
-                    <div class="divBotonStart">
-                        <div class="megaman" id="megaman">
-                    
-                        </div>
-                        <div class="billBala" id="billBala">
+                            <fieldset>
+                                <div>
+                                    <label for="filas">Filas:</label>
+                                    <input type="number" id="filas">
+                                </div>
+                                <div>
+                                    <label for="columnas">Columnas:</label>
+                                    <input type="number" id="columnas">
+                                </div>
+                                <div>
+                                    <label for="bombas">Nº de bombas:</label>
+                                    <input type="number" id="nbombas">
+                                </div>
+                            </fieldset>
 
                         </div>
-                        <button id="botonStart" class="botonStart pixel-corners" type="button">Iniciar Partida</button>
-                    </div>
+                        <div class="divBotonStart">
+                            <div class="megaman" id="megaman">
+                        
+                            </div>
+                            <div class="billBala" id="billBala">
+
+                            </div>
+                            <button id="botonStart" class="botonStart" type="button">Iniciar Partida</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -189,14 +186,16 @@
     </main>
     <footer>
         <div class="row divFooter no-gutters">
-            <div class="col-4">
-                <p>*redes sociales*</p>
+            <div class="col-4 rrss">
+                <a href=""><img src="img/twitter.png" alt=""></a>
+                <a href=""><img src="img/instagram.png" alt=""></a>
+                <a href=""><img src="img/facebook.png" alt=""></a>
             </div>
-            <div class="col-4">
-                <p>Creado por <span class="nombreAutor">Adrián García</span></p>
+            <div class="col-4 autor d-flex align-items-center justify-content-center">
+                <span>Creado por <span class="nombreAutor">Adrián García 👾</span></span>
             </div>
-            <div class="col-4">
-                *declaración de accesibilidad*  
+            <div class="col-4 copyright d-flex align-items-center justify-content-center peque">
+                <img src="img/copyright.png" alt="">
             </div>
         </div>
     </footer>
