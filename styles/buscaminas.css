@@ -115,7 +115,7 @@ td{
 .nav{
     display: none;
     margin: 10px auto;
-    gap: 10px;
+    gap: 50px;
 }
 .nav button{
     transition: 0.3s;
@@ -123,6 +123,15 @@ td{
 .nav button:hover{
     transition: 0.3s;
     transform: scale(1.25);
+}
+.juego1:hover{
+    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px;
+}
+.juego2:hover{
+    box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px;
+}
+.juego3:hover{
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px;
 }
 .active{
     display: flex;
@@ -264,18 +273,49 @@ fieldset{
 
 .divBotonStart{
     position: relative;
+    margin: 10px 0 !important;
 }
+
+.botonStart{
+    transition: 0.3s;
+}
+.pixel-corners {
+    clip-path: polygon(
+      0px 8px,
+      4px 8px,
+      4px 4px,
+      8px 4px,
+      8px 0px,
+      calc(100% - 8px) 0px,
+      calc(100% - 8px) 4px,
+      calc(100% - 4px) 4px,
+      calc(100% - 4px) 8px,
+      100% 8px,
+      100% calc(100% - 8px),
+      calc(100% - 4px) calc(100% - 8px),
+      calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 8px) calc(100% - 4px),
+      calc(100% - 8px) 100%,
+      8px 100%,
+      8px calc(100% - 4px),
+      4px calc(100% - 4px),
+      4px calc(100% - 8px),
+      0px calc(100% - 8px)
+    );
+  }
 
 /* Estilos tablero */
 
 .tablero{
-    max-width: 100%;
+    overflow: auto;
 }
 .fila{
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
 }
 .casilla{
+    flex-shrink: 0;
     display: flex;
     width: 30px;
     height: 30px;
@@ -285,8 +325,6 @@ fieldset{
     background-size: cover;
     border: 1px solid black;
 }
-
-
 
 /* Animacion de megaman */
 

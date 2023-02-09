@@ -109,13 +109,14 @@ function crearTablero(filas, columnas) {
         // let fila = tablero.insertRow();
         divString += "<div class='fila'>";
         for (let j = 0; j < columnas; j++) {
-            divString += "<div class='casilla' id='" + contador + "'></div>";
+            divString += "<div class='casilla' id='" + contador + "' onclick='destaparCasilla(" + contador.toString() + ")'></div>";
             contador++;
         }
         divString += "</div>";
     }
     tablero.innerHTML = divString;
 
+    
     let casillas = document.getElementsByClassName("casilla");
 
     for (let casilla of casillas) {
@@ -138,6 +139,8 @@ function rellenarMinas(nbombas, filas, columnas) {
             minas.push(randomNum.toString());
         }
     }
+
+    console.log(minas);
 }
 
 function ponerBanderita(id) {
@@ -148,7 +151,7 @@ function ponerBanderita(id) {
 
 function destaparCasilla(id) {
 
-    if (minas.includes(id)) {
+    if (minas.includes(id.toString())) {
         minas.forEach(element => {
             document.getElementById(element).classList.add("bomba");
             derrota();
