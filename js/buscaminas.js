@@ -23,7 +23,7 @@ botonStart.addEventListener("click", iniciarPartida);
 // Animacion de megaman
 
 function empezarPartida() {
-    if (megaman.style.display === "none") {
+    if (window.getComputedStyle(megaman, null).display === "none") {
         calcularMultiplos(nfilas, ncolumnas);
         totalCeldas = nfilas * ncolumnas;
         divDatosPartida.classList.add("hidden");
