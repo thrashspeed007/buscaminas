@@ -168,8 +168,10 @@ header{
     width: 100%;
     padding: 5px;
     max-width: 200px;
-    font-family: var(--negrita);
     text-align: center;
+}
+.victoria span{
+    font-family: var(--negrita);
 }
 
 .derrota{
@@ -186,6 +188,10 @@ header{
 }
 .bomba{
     background-image: url(../img/bomba.webp), url(../img/ground.png) !important;
+}
+.bombaRoja{
+    background-image: url(../img/bomba.webp) !important;
+    background-color: red;
 }
 
 /* Estilos  instrucciones */

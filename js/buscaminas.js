@@ -155,8 +155,6 @@ function rellenarMinas(nbombas, filas, columnas) {
             minas.push(randomNum.toString());
         }
     }
-
-    console.log(minas);
 }
 
 function ponerBanderita(id) {
@@ -172,6 +170,7 @@ function destaparCasilla(id) {
             document.getElementById(element).classList.add("bomba");
             derrota();
         });
+        document.getElementById(id).classList.add("bombaRoja");
 
     }else if (!document.getElementById(id).hasChildNodes() && !document.getElementById(id).classList.contains("celdaLibre")) {
             destaparAutomatico(parseInt(id));   
@@ -179,8 +178,6 @@ function destaparCasilla(id) {
 }
 
 function destaparAutomatico(id) {
-
-    console.log(celdasLiberadas);
 
     let up = false;
     let down = false;
