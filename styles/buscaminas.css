@@ -75,11 +75,17 @@ header{
 .fotosDecoracion{
     display: none;
 }
+.fotosExtra{
+    display: none;
+}
 .shovelBros img{
     width: 450px !important;
 }
 .princeofpersia img{
     width: 500px !important;;
+}
+.blasphemous img{
+    width: 120px !important;
 }
 
 /* Estilos boton zoom */
@@ -154,6 +160,17 @@ header{
 }
 
 /* Estilos tablero */
+
+.victoria{
+    display: none;
+    border: 2px solid;
+    color: green;
+    width: 100%;
+    padding: 5px;
+    max-width: 200px;
+    font-family: var(--negrita);
+    text-align: center;
+}
 
 .derrota{
     display: none;
@@ -403,3 +420,13 @@ fieldset{
         display: none;
     }
 }
+@media (min-width: 1200px){
+    .fotosExtra{
+        display: flex;
+    }
+    .ryu{
+        width: 100px !important;
+    }
+}
+
+

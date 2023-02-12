@@ -5,6 +5,7 @@ let nav = document.getElementById('nav');
 let divJuego = document.getElementById('divJuego');
 let tablero = document.getElementById('tablero');
 let divDatosPartida = document.getElementById('datosPartida');
+let divInstrucciones = document.getElementById('instrucciones');
 let divFormulario = document.getElementById('divFormulario');
 let minas = new Array();
 let nfilas;
@@ -13,6 +14,8 @@ let nminas;
 let multiplos = new Array();
 let totalCeldas = 0;
 let celdasBlancas = new Array();
+let celdasLiberadas = 0;
+let celdasExpuestas = new Array();
 let celdasBlancasUsadas = new Array();
 let megaman = document.getElementById('megaman');
 let billBala = document.getElementById('billBala');
@@ -23,14 +26,17 @@ botonStart.addEventListener("click", iniciarPartida);
 // Animacion de megaman
 
 function empezarPartida() {
+
+    botonStart.classList.add("noHover");
+
     if (window.getComputedStyle(megaman, null).display === "none") {
         calcularMultiplos(nfilas, ncolumnas);
         totalCeldas = nfilas * ncolumnas;
         divDatosPartida.classList.add("hidden");
+        divInstrucciones.classList.add("hidden");
         crearTablero(nfilas, ncolumnas);
         rellenarMinas(nminas, nfilas, ncolumnas);
     }else{
-        console.log(megaman.style.display);
         megaman.classList.add("megamanActive");
         setTimeout(function() {
             billBala.classList.add("billBalaActive");
@@ -39,6 +45,7 @@ function empezarPartida() {
             calcularMultiplos(nfilas, ncolumnas);
             totalCeldas = nfilas * ncolumnas;
             divDatosPartida.classList.add("hidden");
+            divInstrucciones.classList.add("hidden");
             crearTablero(nfilas, ncolumnas);
             rellenarMinas(nminas, nfilas, ncolumnas);
         }, 1000);
@@ -143,7 +150,7 @@ function rellenarMinas(nbombas, filas, columnas) {
 
     for (let i = 0; i < nbombas;) {
         let randomNum = Math.floor(Math.random() * (totalCeldas));
-        if (!minas.includes(randomNum)) {
+        if (!minas.includes(randomNum.toString())) {
             i++;
             minas.push(randomNum.toString());
         }
@@ -166,13 +173,14 @@ function destaparCasilla(id) {
             derrota();
         });
 
-    }else{
-        destaparAutomatico(parseInt(id));
+    }else if (!document.getElementById(id).hasChildNodes() && !document.getElementById(id).classList.contains("celdaLibre")) {
+            destaparAutomatico(parseInt(id));   
     }
-
 }
 
 function destaparAutomatico(id) {
+
+    console.log(celdasLiberadas);
 
     let up = false;
     let down = false;
@@ -256,6 +264,10 @@ function destaparAutomatico(id) {
         if (celdasBlancas.length != 0) {
             destaparAutomatico(celdasBlancas[0]);
         }
+    }
+
+    if (celdasLiberadas >= (totalCeldas - nminas)) {
+        victoria();
     }
 
 
@@ -459,6 +471,11 @@ function calcularBombasVecinas(id) {
         document.getElementById(id).classList.add("celdaConNumero");
     }
 
+    if (!celdasExpuestas.includes(id)) {
+        celdasExpuestas.push(id);
+        celdasLiberadas++;
+    }
+
     return contador;
 }
 
@@ -518,13 +535,21 @@ function calcularMultiplos(filas, columnas) {
     }
 }
 
-function juego() {
+function contarCeldasExpuestas() {
     
+}
+
+function victoria() {
+    document.getElementById('victoria').style.display = "block";
+    minas.forEach(element => {
+        document.getElementById(element).classList.add("bandera");
+    });
+    tablero.classList.add("noHover");
 }
 
 function derrota() {
     document.getElementById('derrota').style.display = "block";
-
+    tablero.classList.add("noHover");
 }
 
 function reset() {
