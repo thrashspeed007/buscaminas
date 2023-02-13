@@ -20,6 +20,14 @@ let celdasBlancasUsadas = new Array();
 let megaman = document.getElementById('megaman');
 let billBala = document.getElementById('billBala');
 let botonStart = document.getElementById('botonStart');
+let tiempo = document.getElementById('tiempo');
+let minutosDiv = document.getElementById('minutos');
+let segundosDiv = document.getElementById('segundos');
+let segundos = 0;
+let minutos = 0;
+let controles = document.getElementById('controles');
+let carita = document.getElementById('carita');
+let cronometro;
 
 botonStart.addEventListener("click", iniciarPartida);
 
@@ -36,6 +44,8 @@ function empezarPartida() {
         divInstrucciones.classList.add("hidden");
         crearTablero(nfilas, ncolumnas);
         rellenarMinas(nminas, nfilas, ncolumnas);
+        controles.style.display = "flex";
+        iniciarCrono();
     }else{
         megaman.classList.add("megamanActive");
         setTimeout(function() {
@@ -48,8 +58,12 @@ function empezarPartida() {
             divInstrucciones.classList.add("hidden");
             crearTablero(nfilas, ncolumnas);
             rellenarMinas(nminas, nfilas, ncolumnas);
+            controles.style.display = "flex";
+            iniciarCrono();
         }, 1000);
     }
+
+    carita.addEventListener('click', reset);
 }
 
 // Opciones del zoom
@@ -547,8 +561,54 @@ function victoria() {
 function derrota() {
     document.getElementById('derrota').style.display = "block";
     tablero.classList.add("noHover");
+    clearInterval(cronometro);
 }
 
 function reset() {
+    document.getElementById('derrota').style.display = "none";
+    document.getElementById('victoria').style.display = "none";
+    if (tablero.classList.contains('noHover')) {
+        tablero.classList.remove('noHover');
+    }
+    minutosDiv.innerHTML = "";
+    minutos = 0;
+    segundos = 0;
+    clearInterval(cronometro);
+    iniciarCrono();
+
     minas = new Array();
+    rellenarMinas(nminas, nfilas, ncolumnas);
+    celdasBlancas = new Array();
+    celdasLiberadas = 0;
+    celdasExpuestas = new Array();
+    celdasBlancasUsadas = new Array();
+    
+    let casillas = document.getElementsByClassName("casilla");
+
+    for (let casilla of casillas) {
+        casilla.innerHTML = "";
+        casilla.className = "";
+        casilla.classList.add("casilla");
+    }
+}
+
+function iniciarCrono() {
+    minutosDiv.innerHTML = minutos + " :";
+    segundosDiv.innerHTML = "0" + segundos;
+    cronometro = setInterval(function(){
+        segundos++;
+
+        if (segundos === 60) {
+            minutos++;
+            segundos = 0;
+        }
+
+        minutosDiv.innerHTML = minutos + " :";
+
+        if (segundos < 10) {
+            segundosDiv.innerHTML = "0" + segundos;
+        }else{
+            segundosDiv.innerHTML = segundos;    
+        }
+    }, 1000);
 }

@@ -161,6 +161,24 @@ header{
 
 /* Estilos tablero */
 
+.segundos{
+    margin-left: 5px;
+}
+
+.controles{
+    display: none;
+}
+
+.carita{
+    cursor: pointer;
+    height: 44px;
+    width: 45px;
+    background-image: url(../img/caritas.png);
+    background-position: 0px 0px;
+    background-size: 100px;
+    background-repeat: no-repeat;
+}
+
 .victoria{
     display: none;
     border: 2px solid;
