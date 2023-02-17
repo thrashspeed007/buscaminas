@@ -327,6 +327,10 @@ fieldset{
 
 /* Estilos tablero */
 
+.contadorMinas{
+    color: yellow;
+}
+
 .tablero{
     overflow: auto;
 }

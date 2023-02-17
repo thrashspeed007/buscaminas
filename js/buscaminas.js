@@ -27,6 +27,8 @@ let segundos = 0;
 let minutos = 0;
 let controles = document.getElementById('controles');
 let carita = document.getElementById('carita');
+let contadorMinas = 0;
+let contadorMinasDiv = document.getElementById('contadorMinas');
 let cronometro;
 
 botonStart.addEventListener("click", iniciarPartida);
@@ -62,6 +64,10 @@ function empezarPartida() {
             iniciarCrono();
         }, 1000);
     }
+
+    contadorMinas = nminas;
+    contadorMinasDiv.innerHTML = contadorMinas;
+
 
     carita.addEventListener('click', reset);
 }
@@ -172,8 +178,14 @@ function rellenarMinas(nbombas, filas, columnas) {
 }
 
 function ponerBanderita(id) {
-    if (!document.getElementById(id).hasChildNodes() && !document.getElementById(id).classList.contains("celdaLibre")) {
+    if (contadorMinas!==0 && !document.getElementById(id).hasChildNodes() && !document.getElementById(id).classList.contains("celdaLibre")) {
         document.getElementById(id).classList.toggle("bandera");
+        if (document.getElementById(id).classList.contains("bandera")) {
+            contadorMinas--;
+        }else{
+            contadorMinas++;
+        }
+        contadorMinasDiv.innerHTML = contadorMinas;
     }
 }
 
@@ -478,8 +490,13 @@ function calcularBombasVecinas(id) {
 
             break;
         }
-        document.getElementById(id).classList.remove("bandera");
         document.getElementById(id).classList.add("celdaConNumero");
+    }
+
+    if (document.getElementById(id).classList.contains("bandera")) {
+        document.getElementById(id).classList.remove("bandera");
+        contadorMinas++;
+        contadorMinasDiv.innerHTML = contadorMinas;
     }
 
     if (!celdasExpuestas.includes(id)) {
@@ -584,6 +601,8 @@ function reset() {
     celdasBlancasUsadas = new Array();
     
     let casillas = document.getElementsByClassName("casilla");
+    contadorMinas = nminas;
+    contadorMinasDiv.innerHTML = contadorMinas;
 
     for (let casilla of casillas) {
         casilla.innerHTML = "";
