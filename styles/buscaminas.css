@@ -161,6 +161,10 @@ header{
 
 /* Estilos tablero */
 
+.divJuego{
+    display: none;
+}
+
 .segundos{
     margin-left: 5px;
 }
@@ -177,6 +181,10 @@ header{
     background-position: 0px 0px;
     background-size: 100px;
     background-repeat: no-repeat;
+}
+
+.carita:hover{
+    background-position: -55px 0px !important;
 }
 
 .victoria{
@@ -203,6 +211,7 @@ header{
 }
 .celdaLibre{
     background-image: url(../img/ground.png) !important;
+    pointer-events: none;
 }
 .bomba{
     background-image: url(../img/bomba.webp), url(../img/ground.png) !important;
@@ -273,10 +282,6 @@ fieldset{
     padding: 5px;
 }
 
-.hidden{
-    display: none !important;
-}
-
 /*Estilos para las reglas del juego*/
 
 .divRegla{
@@ -329,10 +334,17 @@ fieldset{
 
 .contadorMinas{
     color: yellow;
+    width: 50px;
+    text-align: center;
 }
 
 .tablero{
     overflow: auto;
+}
+
+.explosion{
+    position: absolute;
+    display: none;
 }
 .fila{
     display: flex;

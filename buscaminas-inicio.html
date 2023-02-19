@@ -47,7 +47,7 @@
             </div>
             <div class="col-4 noHover d-flex justify-content-start align-items-center">
                     <div class="fotosDecoracion sonic peque">
-                        <img src="img/sonic-pointing.gif" alt="">
+                        <img src="img/sonic-pointing.gif" alt="" id="sonic">
                     </div>
             </div>
         </div>
@@ -195,7 +195,7 @@
             </div>
         </div>
 
-        <div class="divJuego d-flex justify-content-center m-3 flex-column" id="divJuego">
+        <div class="divJuego justify-content-center m-3 flex-column" id="divJuego">
 
             <div class="error derrota m-1 mx-auto" id="derrota">
                 <span>GAME OVER</span>
@@ -204,8 +204,8 @@
                 <span>¡ENHORABUENA, HAS GANADO!</span>
             </div>
 
-            <div class="controles row justify-content-center mb-2" id="controles">
-                <div class="col-4 tiempo row no-gutters justify-content-center align-items-center" id="tiempo">
+            <div class="controles d-flex row justify-content-center mb-2" id="controles">
+                <div class="col-4 tiempo row no-gutters justify-content-end align-items-center" id="tiempo">
                     <div class="minutos" id="minutos"></div>
                     <div class="segundos" id="segundos"></div>
                 </div>
@@ -215,7 +215,7 @@
                     </div>
 
                 </div>
-                <div class="col-4 row justify-content-around align-items-center no-gutters">
+                <div class="col-4 row justify-content-start align-items-center no-gutters">
                     <div>
                         <span>M. Restantes:</span>
                     </div>
@@ -229,6 +229,14 @@
                 <div id="tablero" class="d-flex flex-column tablero">
 
                 </div>
+                <div class="explosion" id="explosion">
+                    <img src="img/explosion.gif" alt="" id="explosionGif">
+                </div>
+            </div>
+            <div class="btnPantallaInicio row justify-content-center m-4" id="btnPantallaInicio">
+                <button>
+                    Volver a la pantalla inicial
+                </button>
             </div>
         </div>
 
