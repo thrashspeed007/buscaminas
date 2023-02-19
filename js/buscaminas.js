@@ -33,6 +33,7 @@ let contadorMinasDiv = document.getElementById('contadorMinas');
 let cronometro;
 let explosion = document.getElementById('explosion');
 let explosionGif = document.getElementById('explosionGif');
+let celdasADestapar = new Array();
 
 botonStart.addEventListener("click", iniciarPartida);
 btnPantallaInicio.addEventListener("click", volver);
@@ -143,7 +144,7 @@ function crearTablero(filas, columnas) {
     for (let i = 0; i < filas; i++) {
         divString += "<div class='fila'>";
         for (let j = 0; j < columnas; j++) {
-            divString += "<div class='casilla' id='" + contador + "' onclick='destaparCasilla(" + contador.toString() + ")'></div>";
+            divString += "<div class='casilla' id='" + contador + "'></div>";
             contador++;
         }
         divString += "</div>";
@@ -155,11 +156,13 @@ function crearTablero(filas, columnas) {
 
     for (let casilla of casillas) {
          casilla.addEventListener("click", function() {
-                destaparCasilla(casilla.id);
+                let idParseado = parseInt(casilla.id);
+                destaparCasilla(idParseado);
             });
         casilla.addEventListener("contextmenu", function(event) {
                 event.preventDefault();
-                ponerBanderita(casilla.id);
+                let idParseado = parseInt(casilla.id);
+                ponerBanderita(idParseado);
             });
     }
 }
@@ -192,108 +195,227 @@ function ponerBanderita(id) {
 
 function destaparCasilla(id) {
 
-    if (minas.includes(id.toString())) {
+    if (!document.getElementById(id).classList.contains("bandera") && minas.includes(id.toString())) {
         minas.forEach(element => {
             document.getElementById(element).classList.add("bomba");
             derrota();
         });
         document.getElementById(id).classList.add("bombaRoja");
 
-    }else if (!document.getElementById(id).hasChildNodes() && !document.getElementById(id).classList.contains("celdaLibre")) {
-            destaparAutomatico(parseInt(id));   
+    }else if (/*!document.getElementById(id).hasChildNodes() && */!document.getElementById(id).classList.contains("celdaLibre") && !document.getElementById(id).classList.contains("bandera")) {
+
+        try {
+            if (document.getElementById(id).hasChildNodes()) {
+
+                celdasADestapar.push(id);
+
+                let up = false;
+                let down = false;
+                let right = false;
+                let left = false;
+            
+                // Calcular si la casilla esta en algun borde o esquina
+            
+                if (multiplos.includes(id + 1)) {
+                    right = true;
+                }
+            
+                if (multiplos.includes(id)) {
+                    left = true;
+                }
+            
+                if ( (id - ncolumnas) < 0) {
+                    up = true;
+                }
+                if ((id + ncolumnas) >= totalCeldas ) {
+                    down = true;
+                }
+
+
+                if (up && left) {
+                    celdasADestapar.push(id + 1);
+                    celdasADestapar.push(id + ncolumnas + 1);
+                    celdasADestapar.push(id + ncolumnas);
+                }else if (up && right) {
+                    celdasADestapar.push(id - 1);
+                    celdasADestapar.push(id + ncolumnas - 1);
+                    celdasADestapar.push(id + ncolumnas);
+                }else if (down && left) {
+                    celdasADestapar.push(id - ncolumnas);
+                    celdasADestapar.push(id - ncolumnas + 1);
+                    celdasADestapar.push(id + 1);
+                }else if (down && right) {
+                    celdasADestapar.push(id - ncolumnas);
+                    celdasADestapar.push(id - ncolumnas - 1);
+                    celdasADestapar.push(id - 1);
+                
+                }else if (up) {
+                    celdasADestapar.push(id - 1);
+                    celdasADestapar.push(id + ncolumnas - 1);
+                    celdasADestapar.push(id + ncolumnas);
+                    celdasADestapar.push(id + ncolumnas + 1);
+                    celdasADestapar.push(id + 1);
+                }else if (down) {
+                    celdasADestapar.push(id - 1);
+                    celdasADestapar.push(id - ncolumnas - 1);
+                    celdasADestapar.push(id - ncolumnas);
+                    celdasADestapar.push(id - ncolumnas + 1);
+                    celdasADestapar.push(id + 1);
+                }else if (left) {
+                    celdasADestapar.push(id - ncolumnas);
+                    celdasADestapar.push(id - ncolumnas + 1);
+                    celdasADestapar.push(id + 1);
+                    celdasADestapar.push(id + ncolumnas + 1);
+                    celdasADestapar.push(id + ncolumnas);
+                }else if (right) {
+                    celdasADestapar.push(id - ncolumnas);
+                    celdasADestapar.push(id - ncolumnas - 1);
+                    celdasADestapar.push(id - 1);
+                    celdasADestapar.push(id + ncolumnas - 1);
+                    celdasADestapar.push(id + ncolumnas);
+                }else{
+                    celdasADestapar.push(id - ncolumnas);
+                    celdasADestapar.push(id - ncolumnas + 1);
+                    celdasADestapar.push(id + 1);
+                    celdasADestapar.push(id + ncolumnas + 1);
+                    celdasADestapar.push(id + ncolumnas);
+                    celdasADestapar.push(id + ncolumnas - 1);
+                    celdasADestapar.push(id - 1);
+                    celdasADestapar.push(id - ncolumnas - 1);
+                }
+
+            }
+
+            destaparAutomatico(id); 
+        }catch (e) {
+            
+        }
+
     }
 }
 
 function destaparAutomatico(id) {
 
-    let up = false;
-    let down = false;
-    let right = false;
-    let left = false;
-
-    // Calcular si la casilla esta en algun borde o esquina
-
-    if (multiplos.includes(id + 1)) {
-        right = true;
+    if (id > totalCeldas || id < 0) {
+        return;
     }
 
-    if (multiplos.includes(id)) {
-        left = true;
-    }
+    if (!document.getElementById(id).classList.contains("bandera") && minas.includes(id.toString())) {
+        minas.forEach(element => {
+            document.getElementById(element).classList.add("bomba");
+            derrota();
+        });
+        document.getElementById(id).classList.add("bombaRoja");
+        return;
 
-    if ( (id - ncolumnas) < 0) {
-        up = true;
-    }
-    if ((id + ncolumnas) >= totalCeldas ) {
-        down = true;
-    }
-    
-    if (calcularBombasVecinas(id) === 0) {
-
-        if (up && left) {
-            calcularBombasVecinas(id + 1);
-            calcularBombasVecinas(id + ncolumnas + 1);
-            calcularBombasVecinas(id + ncolumnas);
-        }else if (up && right) {
-            calcularBombasVecinas(id - 1);
-            calcularBombasVecinas(id + ncolumnas - 1);
-            calcularBombasVecinas(id + ncolumnas);
-        }else if (down && left) {
-            calcularBombasVecinas(id - ncolumnas);
-            calcularBombasVecinas(id - ncolumnas + 1);
-            calcularBombasVecinas(id + 1);
-        }else if (down && right) {
-            calcularBombasVecinas(id - ncolumnas);
-            calcularBombasVecinas(id - ncolumnas - 1);
-            calcularBombasVecinas(id - 1);
+    }else if (document.getElementById(id).classList.contains("bandera")) {
+        console.log(id + " tiene bandera, la salto");
+        celdasADestapar.shift();
+        destaparAutomatico(celdasADestapar[0]);   
         
-        }else if (up) {
-            calcularBombasVecinas(id - 1);
-            calcularBombasVecinas(id + ncolumnas - 1);
-            calcularBombasVecinas(id + ncolumnas);
-            calcularBombasVecinas(id + ncolumnas + 1);
-            calcularBombasVecinas(id + 1);
-        }else if (down) {
-            calcularBombasVecinas(id - 1);
-            calcularBombasVecinas(id - ncolumnas - 1);
-            calcularBombasVecinas(id - ncolumnas);
-            calcularBombasVecinas(id - ncolumnas + 1);
-            calcularBombasVecinas(id + 1);
-        }else if (left) {
-            calcularBombasVecinas(id - ncolumnas);
-            calcularBombasVecinas(id - ncolumnas + 1);
-            calcularBombasVecinas(id + 1);
-            calcularBombasVecinas(id + ncolumnas + 1);
-            calcularBombasVecinas(id + ncolumnas);
-        }else if (right) {
-            calcularBombasVecinas(id - ncolumnas);
-            calcularBombasVecinas(id - ncolumnas - 1);
-            calcularBombasVecinas(id - 1);
-            calcularBombasVecinas(id + ncolumnas - 1);
-            calcularBombasVecinas(id + ncolumnas);
-        }else{
-            calcularBombasVecinas(id - ncolumnas);
-            calcularBombasVecinas(id - ncolumnas + 1);
-            calcularBombasVecinas(id + 1);
-            calcularBombasVecinas(id + ncolumnas + 1);
-            calcularBombasVecinas(id + ncolumnas);
-            calcularBombasVecinas(id + ncolumnas - 1);
-            calcularBombasVecinas(id - 1);
-            calcularBombasVecinas(id - ncolumnas - 1);
+    }else{
+        let up = false;
+        let down = false;
+        let right = false;
+        let left = false;
+    
+        // Calcular si la casilla esta en algun borde o esquina
+    
+        if (multiplos.includes(id + 1)) {
+            right = true;
+        }
+    
+        if (multiplos.includes(id)) {
+            left = true;
+        }
+    
+        if ( (id - ncolumnas) < 0) {
+            up = true;
+        }
+        if ((id + ncolumnas) >= totalCeldas ) {
+            down = true;
+        }
+        
+        if (calcularBombasVecinas(id) === 0) {
+    
+            if (up && left) {
+                calcularBombasVecinas(id + 1);
+                calcularBombasVecinas(id + ncolumnas + 1);
+                calcularBombasVecinas(id + ncolumnas);
+            }else if (up && right) {
+                calcularBombasVecinas(id - 1);
+                calcularBombasVecinas(id + ncolumnas - 1);
+                calcularBombasVecinas(id + ncolumnas);
+            }else if (down && left) {
+                calcularBombasVecinas(id - ncolumnas);
+                calcularBombasVecinas(id - ncolumnas + 1);
+                calcularBombasVecinas(id + 1);
+            }else if (down && right) {
+                calcularBombasVecinas(id - ncolumnas);
+                calcularBombasVecinas(id - ncolumnas - 1);
+                calcularBombasVecinas(id - 1);
+            
+            }else if (up) {
+                calcularBombasVecinas(id - 1);
+                calcularBombasVecinas(id + ncolumnas - 1);
+                calcularBombasVecinas(id + ncolumnas);
+                calcularBombasVecinas(id + ncolumnas + 1);
+                calcularBombasVecinas(id + 1);
+            }else if (down) {
+                calcularBombasVecinas(id - 1);
+                calcularBombasVecinas(id - ncolumnas - 1);
+                calcularBombasVecinas(id - ncolumnas);
+                calcularBombasVecinas(id - ncolumnas + 1);
+                calcularBombasVecinas(id + 1);
+            }else if (left) {
+                calcularBombasVecinas(id - ncolumnas);
+                calcularBombasVecinas(id - ncolumnas + 1);
+                calcularBombasVecinas(id + 1);
+                calcularBombasVecinas(id + ncolumnas + 1);
+                calcularBombasVecinas(id + ncolumnas);
+            }else if (right) {
+                calcularBombasVecinas(id - ncolumnas);
+                calcularBombasVecinas(id - ncolumnas - 1);
+                calcularBombasVecinas(id - 1);
+                calcularBombasVecinas(id + ncolumnas - 1);
+                calcularBombasVecinas(id + ncolumnas);
+            }else{
+                calcularBombasVecinas(id - ncolumnas);
+                calcularBombasVecinas(id - ncolumnas + 1);
+                calcularBombasVecinas(id + 1);
+                calcularBombasVecinas(id + ncolumnas + 1);
+                calcularBombasVecinas(id + ncolumnas);
+                calcularBombasVecinas(id + ncolumnas - 1);
+                calcularBombasVecinas(id - 1);
+                calcularBombasVecinas(id - ncolumnas - 1);
+            }
+    
+            celdasBlancas.forEach(celda => {
+                if (!celdasBlancasUsadas.includes(celda)) {
+                    celdasBlancasUsadas.push(celda);
+                }
+            });
+        
+            if (celdasBlancas.length != 0) {
+                celdasBlancas.shift();
+                destaparAutomatico(celdasBlancas[0]);
+            }
         }
 
-        celdasBlancasUsadas = celdasBlancasUsadas.concat(celdasBlancas);
-        celdasBlancas.shift();
-    
-        if (celdasBlancas.length != 0) {
-            destaparAutomatico(celdasBlancas[0]);
+        if (celdasADestapar.length !== 0) {
+            let celda = celdasADestapar[0];
+            console.log(celdasADestapar);
+            console.log("destapo " + celda);
+            if (!document.getElementById(celda).classList.contains("bandera")) {
+                celdasADestapar.shift();
+            }
+            destaparAutomatico(celda);   
         }
     }
 
     if (celdasLiberadas >= (totalCeldas - nminas)) {
         victoria();
     }
-
 
 }
 
@@ -468,7 +590,9 @@ function calcularBombasVecinas(id) {
     }
 
     if (contador === 0) {
+    
         document.getElementById(id).classList.add("celdaLibre");
+        
         if (!celdasBlancasUsadas.includes(id)) {
             celdasBlancas.push(id);
         }
@@ -491,7 +615,8 @@ function calcularBombasVecinas(id) {
 
             break;
         }
-        document.getElementById(id).classList.add("noHover");
+        document.getElementById(id).firstChild.classList.add("noHover");
+        document.getElementById(id).classList.add("celdaConNumero");
     }
 
     if (document.getElementById(id).classList.contains("bandera")) {
@@ -602,6 +727,7 @@ function resetVariables() {
     celdasExpuestas = new Array();
     celdasBlancasUsadas = new Array();
     minas = new Array();
+    celdasADestapar = new Array();
     carita.style.backgroundPosition = "0px 0px";
     document.getElementById('derrota').style.display = "none";
     document.getElementById('victoria').style.display = "none";
