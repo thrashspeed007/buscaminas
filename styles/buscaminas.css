@@ -213,6 +213,10 @@ header{
     background-image: url(../img/ground.png) !important;
     pointer-events: none;
 }
+.celdaConNumero{
+    background-image: none !important;
+    background-color: #058226 !important;
+}
 .bomba{
     background-image: url(../img/bomba.webp), url(../img/ground.png) !important;
 }
