@@ -413,10 +413,6 @@ function destaparAutomatico(id) {
         }
     }
 
-    if (celdasLiberadas >= (totalCeldas - nminas)) {
-        victoria();
-    }
-
 }
 
 function calcularBombasVecinas(id) {
@@ -628,6 +624,11 @@ function calcularBombasVecinas(id) {
     if (!celdasExpuestas.includes(id)) {
         celdasExpuestas.push(id);
         celdasLiberadas++;
+        console.log(celdasLiberadas);
+    }
+
+    if (celdasLiberadas >= (totalCeldas - nminas)) {
+        victoria();
     }
 
     return contador;
@@ -698,6 +699,7 @@ function victoria() {
     });
     tablero.classList.add("noHover");
     carita.style.backgroundPosition = "0px -50px";
+    clearInterval(cronometro);
 }
 
 function derrota() {
